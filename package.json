@@ -1,0 +1,22 @@
+{
+  "name": "cowin-cron-tracker",
+  "version": "1.0.0",
+  "description": "node cron based tracker to notify of available slots.. atleast that's the plan.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "node",
+    "covid-19",
+    "stayStrongIndia"
+  ],
+  "author": "Vidit Pandey",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cron-validator": "^1.2.1",
+    "node-schedule": "^2.0.0"
+  }
+}
