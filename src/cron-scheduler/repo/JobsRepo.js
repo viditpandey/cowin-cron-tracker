@@ -9,7 +9,7 @@ class JobsRepo {
         return {
           id: item.district_id,
           name: item.district_name || '',
-          cronConfig: process.env.POLLING_CRON_MINUTE.toString() === 'true' ? '* * * * *' : configs.pollingCronInterval,
+          cronConfig: (process.env.POLLING_CRON_MINUTE && process.env.POLLING_CRON_MINUTE.toString() === 'true') ? '* * * * *' : configs.pollingCronInterval,
           toRun: item.toRun || true,
           api: this.prepareAJob(item.district_id),
           ageLimit: item.min_age_limit,
