@@ -14,8 +14,8 @@ const server = http.createServer((req, res) => {
   // res.write(`The node cron is running with following jobs running ${runningJobs} \n ${jobResponses} \n ${errorResponses}`)
   res.end()
 })
-
-server.listen(3000, () => {
+const port = process.env.port || 3000
+server.listen(port, () => {
   SchedulerManager.initialize()
   console.log('[server.js] cron-scheduler server started')
 })
