@@ -65,7 +65,7 @@ const JobsHandler = (function () {
 
       try {
         if (shouldNotify) {
-          console.log(`[JobsHandler.formatAndTriggerNotifn] job finished ${job.id} ${job.name} , sending mail to ${job.receivers}.`)
+          console.log(`[JobsHandler.formatAndTriggerNotifn] job finished ${job.id} ${job.name} , sending mail to ${job.receivers} with mailer ${process.env.AUTH_USERNAME_GMAIL}.`)
           NotificationHandler.sendMail(
             job.receivers,
             subject,
