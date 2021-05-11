@@ -38,6 +38,7 @@ const JobsHandler = (function () {
 
       function formatAndTriggerNotifn (data, job) {
         if (!data || data.length === 0) return
+        var message = ''
         data.forEach(center => {
           const filteredSessions = []
           if (center && center.sessions && center.sessions.length) {
@@ -48,22 +49,22 @@ const JobsHandler = (function () {
               })
           }
           if (filteredSessions.length) {
-            const formattedData = {
-              name: job.name,
-              available: filteredSessions.length,
-              data: `${center.name} at ${center.address}`,
-              sessions: (filteredSessions.map(sesh => sesh.date)).join(', ')
-            }
+            let formattedData = ''
+            formattedData+='name: ' + job.name + '.\n'
+            formattedData+='age: ' + job.ageLimit + '.\n'
+            formattedData+='details: ' + center.name + ' at ' + center.address + '.\n'
+            formattedData+='sessions: ' + (filteredSessions.map(sesh => sesh.date)).join(', ') + '.\n\n'
+            message+=formattedData
             addToJobResponses(formattedData)
           }
       })
 
-      console.log(`[JobsHandler.formatAndTriggerNotifn] job finished ${job.id} ${job.name}, sending mail.`)
+      console.log(`[JobsHandler.formatAndTriggerNotifn] job finished ${job.id} ${job.name} , sending mail to ${job.receivers}.`)
       try {
         NotificationHandler.sendMail(
           job.receivers,
-          runningJobs
-        ) 
+          message
+        )
       } catch (error) {
         console.log(`[JobsHandler.formatAndTriggerNotifn] job finished ${job.id} ${job.name}, error while sending mail `, error)
       }
@@ -112,7 +113,6 @@ const JobsHandler = (function () {
             if (runningJobs && runningJobs.length > 0) return
             console.log('[JobsHandler.checkAndRegisterNewJobs] get all jobs at Jobs Handler level, these will be configured')
             const jobs = repo.getAllJobs()
-            console.log(jobs)
 
             const unregisteredJobs = []
             // const changedJobs = []

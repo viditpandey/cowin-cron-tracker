@@ -12,7 +12,8 @@ class JobsRepo {
           cronConfig: configs.pollingCronInterval,
           toRun: item.toRun || true,
           api: this.prepareAJob(item.district_id),
-          ageLimit: item.min_age_limit
+          ageLimit: item.min_age_limit,
+          receivers: item.receivers
         }
       })
       return res

@@ -9,13 +9,13 @@ const whatTo = [
         district_id: 646,
         district_name: "Ayodhya",
         min_age_limit: 18,
-        receivers: "cowin-tracker@yopmail.com"
+        receivers: "pandey.avi8@gmail.com, vinodpandey8794@gmail.com"
     },
     {
         district_id: 646,
         district_name: "Ayodhya",
         min_age_limit: 45,
-        receivers: "cowin-tracker@yopmail.com"
+        receivers: "pandey.avi8@gmail.com, vinodpandey8794@gmail.com"
     },
     // {
     //     district_id: 676,
