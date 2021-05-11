@@ -6,8 +6,8 @@ const NotificationHandler = {
         NotificationHandler.transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-              user: process.env.AUTH_USERNAME_GMAIL || '',
-              pass: process.env.AUTH_PASS_GMAIL || ''
+              user: process.env.AUTH_USERNAME_GMAIL || 'viditpandeytest@gmail.com',
+              pass: process.env.AUTH_PASS_GMAIL || 'ViditPandeyTest'
             },
           })
     },
