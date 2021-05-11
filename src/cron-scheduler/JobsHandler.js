@@ -1,15 +1,15 @@
 const cronValidator = require('cron-validator')
-const schedule = require('node-schedule');
-const JobsRepo = require('./repo/JobsRepo');
+const schedule = require('node-schedule')
+const JobsRepo = require('./repo/JobsRepo')
 const axios = require('axios')
 
 
 const JobsHandler = (function () {
 
-    const repo = new JobsRepo();
-    var runningJobs = [];
-    var jobResponses = [];
-    var errorResponses = [];
+    const repo = new JobsRepo()
+    var runningJobs = []
+    var jobResponses = []
+    var errorResponses = []
 
     function verifyJob (job) {
         if (!job || !job.cronConfig) return false
@@ -18,6 +18,10 @@ const JobsHandler = (function () {
       }
 
       function addToRunningJobs (task) { runningJobs.push(task) }
+
+      function addToJobResponses (task) { jobResponses.push(task) }
+
+      function addToErrorResponses (task) { errorResponses.push(task) }
 
       function getJobFromRunningJobs (job) {
         if (!job || !job.id) return null
@@ -30,34 +34,39 @@ const JobsHandler = (function () {
         if (associatedJob && associatedJob.task) console.log(`[JobsHandler.jobExecution] ${job.id} ${job.name} will run next at ${associatedJob.task.nextInvocation()}`)
       }
 
+      function formatAndTriggerNotifn (data) {
+        if (!data || data.length === 0) return
+        data.forEach(center => {
+          const filteredSessions = []
+          if (center && center.sessions && center.sessions.length) {
+              center.sessions.forEach(session => {
+                  if ((session.available_capacity > 0) && (session.min_age_limit === job.ageLimit)) {
+                      filteredSessions.push(session)
+                  }
+              })
+          }
+          if (filteredSessions.length) {
+            addToJobResponses({...center, filteredSessions})
+          }
+      })
+      }
+
       async function jobExecution (job) {
         try {
-            logJobDetails(job);
+            logJobDetails(job)
             // call API from here
             const res = await axios.get(
                 job.api, {
                     headers: {
                         "Accept": '*/*',
-                        "User-Agent": 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
+                        "User-Agent": 'Mozilla/5.0 (Macintosh Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
                     }
                 }).catch(error => {
                 console.log('[JobsHandler.jobExecution] catch block error while api call, error: ', error, error.statusCode, error.statusMessage)
-                errorResponses.push(error);
-            });
-
-            res.data.centers.forEach(center => {
-                const filteredSessions = [];
-                if (center && center.sessions && center.sessions.length) {
-                    center.sessions.forEach(session => {
-                        if ((session.available_capacity > 0) && (session.min_age_limit === job.ageLimit)) {
-                            filteredSessions.push(session);
-                        }
-                    })
-                }
-                if (filteredSessions.length) {
-                    jobResponses.push({...center, filteredSessions})
-                }
+                addToErrorResponses(error)
             })
+
+            formatAndTriggerNotifn (res.data.centers)
 
         } catch (error) {
           return false
@@ -83,8 +92,8 @@ const JobsHandler = (function () {
         getErrorResponses: () => errorResponses,
         checkAndRegisterNewJobs: function () {
             if (runningJobs && runningJobs.length > 0) return
-            console.log('[JobsHandler.checkAndRegisterNewJobs] get all jobs at Jobs Handler level, these will be configured');
-            const jobs = repo.getAllJobs();
+            console.log('[JobsHandler.checkAndRegisterNewJobs] get all jobs at Jobs Handler level, these will be configured')
+            const jobs = repo.getAllJobs()
             console.log(jobs)
 
             const unregisteredJobs = []
@@ -96,11 +105,11 @@ const JobsHandler = (function () {
                 if (!cronValidator.isValidCron(job.cronConfig) && new Date() > new Date(job.cronConfig)) expiredJobs.push(job)
                 else if (!isJobAreadyInRunning) unregisteredJobs.push(job)
                 // else if (isJobAreadyInRunning.cronConfig !== job.cronConfig) changedJobs.push(job)
-            });
-            unregisteredJobs.forEach(job => { registerCronJob(job) });
-            // changedJobs.forEach(job => { rescheduleCronJob(job) });
+            })
+            unregisteredJobs.forEach(job => { registerCronJob(job) })
+            // changedJobs.forEach(job => { rescheduleCronJob(job) })
         }
     }
-})();
+})()
 
-module.exports = JobsHandler;
+module.exports = JobsHandler

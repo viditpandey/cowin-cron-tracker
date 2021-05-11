@@ -1,4 +1,4 @@
-const configs = require('../../config/constants');
+const configs = require('../../config/constants')
 
 class JobsRepo {
   constructor () {}
@@ -14,17 +14,17 @@ class JobsRepo {
           api: this.prepareAJob(item.district_id),
           ageLimit: item.min_age_limit
         }
-      });
-      return res;
+      })
+      return res
     } catch (error) {
-      console.log('[JobsRepo.getAllJobsV2] catch block error: ', error);
-      return null;
+      console.log('[JobsRepo.getAllJobsV2] catch block error: ', error)
+      return null
     }
   }
 
   prepareAJob (district_id) {
-    const dateString = `${new Date().getDate()}-${(new Date().getMonth() + 1)}-${new Date().getFullYear()}`;
-    return configs.whereTo.getCalendarSlots(district_id, dateString);
+    const dateString = `${new Date().getDate()}-${(new Date().getMonth() + 1)}-${new Date().getFullYear()}`
+    return configs.whereTo.getCalendarSlots(district_id, dateString)
   }
 }
 
