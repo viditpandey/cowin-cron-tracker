@@ -8,13 +8,15 @@ const whatTo = [
     {
         district_id: 646,
         district_name: "Ayodhya",
-        min_age_limit: 18
+        min_age_limit: 18,
+        receivers: "cowin-tracker@yopmail.com"
     },
-    // {
-    //     district_id: 646,
-    //     district_name: "Ayodhya",
-    //     min_age_limit: 45
-    // },
+    {
+        district_id: 646,
+        district_name: "Ayodhya",
+        min_age_limit: 45,
+        receivers: "cowin-tracker@yopmail.com"
+    },
     // {
     //     district_id: 676,
     //     district_name: "Meerut",

@@ -1,8 +1,8 @@
 const cronValidator = require('cron-validator')
 const http = require('http')
-const SchedulerManager = require('./cron-scheduler/SchedulerManager')
-const JobsHandler = require('./cron-scheduler/JobsHandler')
-const configs = require('./config/constants')
+const SchedulerManager = require('./src/cron-scheduler/SchedulerManager')
+const JobsHandler = require('./src/cron-scheduler/JobsHandler')
+const configs = require('./src/config/constants')
 
 
 const server = http.createServer((req, res) => {

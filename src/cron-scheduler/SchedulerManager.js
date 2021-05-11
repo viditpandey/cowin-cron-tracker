@@ -14,4 +14,4 @@ const SchedulerManager = {
     }
   }
   
-  module.exports = SchedulerManager
+module.exports = SchedulerManager

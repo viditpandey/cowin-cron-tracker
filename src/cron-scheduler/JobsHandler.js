@@ -2,11 +2,13 @@ const cronValidator = require('cron-validator')
 const schedule = require('node-schedule')
 const JobsRepo = require('./repo/JobsRepo')
 const axios = require('axios')
+const NotificationHandler = require('../notifications/notificationHandler')
 
 
 const JobsHandler = (function () {
 
     const repo = new JobsRepo()
+    NotificationHandler.init();
     var runningJobs = []
     var jobResponses = []
     var errorResponses = []
@@ -34,7 +36,7 @@ const JobsHandler = (function () {
         if (associatedJob && associatedJob.task) console.log(`[JobsHandler.jobExecution] ${job.id} ${job.name} will run next at ${associatedJob.task.nextInvocation()}`)
       }
 
-      function formatAndTriggerNotifn (data) {
+      function formatAndTriggerNotifn (data, job) {
         if (!data || data.length === 0) return
         data.forEach(center => {
           const filteredSessions = []
@@ -46,10 +48,26 @@ const JobsHandler = (function () {
               })
           }
           if (filteredSessions.length) {
-            addToJobResponses({...center, filteredSessions})
+            const formattedData = {
+              name: job.name,
+              available: filteredSessions.length,
+              data: `${center.name} at ${center.address}`,
+              sessions: (filteredSessions.map(sesh => sesh.date)).join(', ')
+            }
+            addToJobResponses(formattedData)
           }
       })
+
+      console.log(`[JobsHandler.formatAndTriggerNotifn] job finished ${job.id} ${job.name}, sending mail.`)
+      try {
+        NotificationHandler.sendMail(
+          job.receivers,
+          runningJobs
+        ) 
+      } catch (error) {
+        console.log(`[JobsHandler.formatAndTriggerNotifn] job finished ${job.id} ${job.name}, error while sending mail `, error)
       }
+    }
 
       async function jobExecution (job) {
         try {
@@ -66,7 +84,7 @@ const JobsHandler = (function () {
                 addToErrorResponses(error)
             })
 
-            formatAndTriggerNotifn (res.data.centers)
+            formatAndTriggerNotifn (res.data.centers, job)
 
         } catch (error) {
           return false
