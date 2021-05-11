@@ -5,6 +5,7 @@ class JobsRepo {
 
   getAllJobs () {
     try {
+      console.log('preferred cron config: ', (process.env.POLLING_CRON_MINUTE && process.env.POLLING_CRON_MINUTE.toString() === 'true') ? '* * * * *' : configs.pollingCronInterval)
       const res = configs.whatTo.map(item => {
         return {
           id: item.district_id,

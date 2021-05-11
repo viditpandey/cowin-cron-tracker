@@ -125,7 +125,7 @@ const JobsHandler = (function () {
             // const changedJobs = []
             const expiredJobs = []
             
-            jobs.forEach(job => {
+            jobs && jobs.forEach(job => {
                 const isJobAreadyInRunning = getJobFromRunningJobs(job)
                 if (!cronValidator.isValidCron(job.cronConfig) && new Date() > new Date(job.cronConfig)) expiredJobs.push(job)
                 else if (!isJobAreadyInRunning) unregisteredJobs.push(job)
