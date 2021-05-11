@@ -14,7 +14,7 @@ const NotificationHandler = {
     sendMail: async (to, subject, data) => {
         let info = await NotificationHandler.transporter.sendMail({
             from: 'Vidit Pandey via cowin-covid-tracker',
-            to: `${to},cowin-tracker@yopmail.com`,
+            to: to,
             subject: subject,
             text: data,
         });
