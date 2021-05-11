@@ -11,11 +11,11 @@ const NotificationHandler = {
             },
           })
     },
-    sendMail: async (to, data) => {
+    sendMail: async (to, subject, data) => {
         let info = await NotificationHandler.transporter.sendMail({
             from: 'Vidit Pandey via cowin-covid-tracker',
-            to: `${to}, cowin-tracker@yopmail.com`,
-            subject: "Slots available for:",
+            to: `${to},cowin-tracker@yopmail.com`,
+            subject: subject,
             text: data,
         });
         console.log('info>>>>>>>', info.response)

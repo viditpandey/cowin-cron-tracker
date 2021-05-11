@@ -5,11 +5,12 @@ class JobsRepo {
 
   getAllJobs () {
     try {
+      console.log((process.env.POLLING_CRON || configs.pollingCronInterval), process.env.POLLING_CRON, 'process.env.POLLING_CRON || configs.pollingCronInterval')
       const res = configs.whatTo.map(item => {
         return {
           id: item.district_id,
           name: item.district_name || '',
-          cronConfig: configs.pollingCronInterval,
+          cronConfig: process.env.POLLING_CRON || configs.pollingCronInterval,
           toRun: item.toRun || true,
           api: this.prepareAJob(item.district_id),
           ageLimit: item.min_age_limit,

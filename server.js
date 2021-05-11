@@ -1,12 +1,10 @@
-const cronValidator = require('cron-validator')
 const http = require('http')
 const SchedulerManager = require('./src/cron-scheduler/SchedulerManager')
 const JobsHandler = require('./src/cron-scheduler/JobsHandler')
-const configs = require('./src/config/constants')
 
 
 const server = http.createServer((req, res) => {
-  console.log('server is running', cronValidator.isValidCron(configs.pollingCronInterval))
+  console.log('server is running')
   const runningJobs = JobsHandler.getRunningJobs()
   const jobResponses = JobsHandler.getJobResponses()
   const errorResponses = JobsHandler.getErrorResponses()

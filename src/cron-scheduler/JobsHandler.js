@@ -39,6 +39,8 @@ const JobsHandler = (function () {
       function formatAndTriggerNotifn (data, job) {
         if (!data || data.length === 0) return
         var message = ''
+        var subject = ''
+        var shouldNotify = false
         data.forEach(center => {
           const filteredSessions = []
           if (center && center.sessions && center.sessions.length) {
@@ -49,22 +51,27 @@ const JobsHandler = (function () {
               })
           }
           if (filteredSessions.length) {
+            shouldNotify=true
+            subject = 'Slots available: ' + job.name + ' for age ' + job.ageLimit + '.'
             let formattedData = ''
             formattedData+='name: ' + job.name + '.\n'
             formattedData+='age: ' + job.ageLimit + '.\n'
             formattedData+='details: ' + center.name + ' at ' + center.address + '.\n'
-            formattedData+='sessions: ' + (filteredSessions.map(sesh => sesh.date)).join(', ') + '.\n\n'
+            formattedData+='sessions: ' + (filteredSessions.map(sesh => `${sesh.date} (avaiable slots = ${sesh.available_capacity})`)).join(', ') + '.\n\n'
             message+=formattedData
             addToJobResponses(formattedData)
           }
       })
 
-      console.log(`[JobsHandler.formatAndTriggerNotifn] job finished ${job.id} ${job.name} , sending mail to ${job.receivers}.`)
       try {
-        NotificationHandler.sendMail(
-          job.receivers,
-          message
-        )
+        if (shouldNotify) {
+          console.log(`[JobsHandler.formatAndTriggerNotifn] job finished ${job.id} ${job.name} , sending mail to ${job.receivers}.`)
+          NotificationHandler.sendMail(
+            job.receivers,
+            subject,
+            message
+          )
+        }
       } catch (error) {
         console.log(`[JobsHandler.formatAndTriggerNotifn] job finished ${job.id} ${job.name}, error while sending mail `, error)
       }

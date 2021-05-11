@@ -2,20 +2,20 @@ const BASE_URL = 'https://cdn-api.co-vin.in/api'
 
 const checkNewJobsInterval = '* * * * * *'
 
-const pollingCronInterval = '* * * * *'
+const pollingCronInterval = '*/60 7-15 * * *'
 
 const whatTo = [
     {
         district_id: 646,
         district_name: "Ayodhya",
         min_age_limit: 18,
-        receivers: "pandey.avi8@gmail.com, vinodpandey8794@gmail.com"
+        receivers: "pandey.avi8@gmail.com,vidit8794@gmail.com,vinodpandey8794@gmail.com"
     },
     {
         district_id: 646,
         district_name: "Ayodhya",
         min_age_limit: 45,
-        receivers: "pandey.avi8@gmail.com, vinodpandey8794@gmail.com"
+        receivers: "pandey.avi8@gmail.com,vidit8794@gmail.com,vinodpandey8794@gmail.com"
     },
     // {
     //     district_id: 676,
