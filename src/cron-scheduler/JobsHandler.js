@@ -23,7 +23,7 @@ const JobsHandler = (function () {
       function addToRunningJobs (data) { runningJobs.push(data) }
 
       function addToRunningTasks (data) {
-        runningJobs = runningJobs.filter(job => job.id !== data.id)
+        runningTasks = runningTasks.filter(job => job.id !== data.id)
         runningTasks.push(data)
       }
 
