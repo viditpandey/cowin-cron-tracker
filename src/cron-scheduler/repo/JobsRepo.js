@@ -4,13 +4,13 @@ class JobsRepo {
   constructor () {}
 
   getAllJobs () {
+    const rule = configs.pollingCronInterval
     try {
-      console.log('preferred cron config: ', (process.env.POLLING_CRON_MINUTE && process.env.POLLING_CRON_MINUTE.toString() === 'true') ? '* * * * *' : configs.pollingCronInterval)
       const res = configs.whatTo.map(item => {
         return {
           id: `${item.district_id}_${item.min_age_limit}`,
           name: item.district_name || '',
-          cronConfig: (process.env.POLLING_CRON_MINUTE && process.env.POLLING_CRON_MINUTE.toString() === 'true') ? '* * * * *' : configs.pollingCronInterval,
+          cronConfig: rule,
           toRun: item.toRun || true,
           api: this.prepareAJob(item.district_id),
           ageLimit: item.min_age_limit,

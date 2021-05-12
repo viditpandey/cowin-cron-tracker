@@ -124,7 +124,7 @@ const JobsHandler = (function () {
           const cronSchedule = !cronValidator.isValidCron(job.cronConfig) ? new Date(job.cronConfig) : job.cronConfig
           console.log(`[JobsHandler.registerCronJob] register job attempted for ${job.id} ${job.name} with cronSchedule: ${cronSchedule}`)
           const task = schedule.scheduleJob(cronSchedule, () => jobExecution(job))
-          // console.log(`[JobsHandler.registerCronJob]${job.id} ${job.name} will run next at ${task.nextInvocation()}`)
+          console.log(`[JobsHandler.registerCronJob] register job done for ${job.id} ${job.name} with next run at: ${getNextInvocation(task.nextInvocation())}`)
           addToRunningJobs({ id: job.id, name: job.name, cronConfig: job.cronConfig, task: task })
         } else {
           console.log(`[JobsHandler.registerCronJob] job ${job && job.id} is invalid`)
