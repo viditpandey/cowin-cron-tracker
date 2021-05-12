@@ -3,7 +3,7 @@ const BASE_URL = 'https://cdn-api.co-vin.in/api'
 const checkNewJobsInterval = '* * * * * *'
 
 // const pollingCronInterval = '* * * * *'
-const pollingCronInterval = '*/15 2-10 * * *'
+const pollingCronInterval = '*/15 1-11 * * *'
 
 const whatTo = [
     {
@@ -29,7 +29,7 @@ const whatTo = [
         district_id: 363,
         district_name: "Pune (Maharashtra)",
         min_age_limit: 18,
-        receivers: "pandey.avi8@gmail.com,shwetavalunj@gmail.com,arnavmo@gmail.com"
+        receivers: "pandey.avi8@gmail.com,shwetavalunj@gmail.com,arnavmo@gmail.com,kalburgishraddha@gmail.com"
     },
     {
         district_id: 624,
