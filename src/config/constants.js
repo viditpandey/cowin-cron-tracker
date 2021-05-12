@@ -35,7 +35,7 @@ const whatTo = [
         district_id: 624,
         district_name: "Prayagraj (UP)",
         min_age_limit: 18,
-        receivers: "pandey.avi8@gmail.com"
+        receivers: "pandey.avi8@gmail.com,shalabhms13@gmail.com"
     },
     {
         district_id: 697,
