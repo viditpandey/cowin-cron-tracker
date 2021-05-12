@@ -62,6 +62,12 @@ const whatTo = [
         notifn_threshold: 1,
         receivers: "pandey.avi8@gmail.com,alpanakabra@gmail.com"
     },
+    {
+        district_id: 453,
+        district_name: "Sundargarh (Odisha)",
+        min_age_limit: 15,
+        receivers: "pandey.avi8@gmail.com,i.chhatwani29@gmail.com"
+    },
 ]
 
 const whereTo = {
