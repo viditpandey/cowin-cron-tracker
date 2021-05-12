@@ -57,19 +57,21 @@ const JobsHandler = (function () {
         if (!data || data.length === 0) return
         var message = 'https://selfregistration.cowin.gov.in/ \n'
         var subject = ''
+        var maxSlot = 0;
         var shouldNotify = false
         data.forEach(center => {
           const filteredSessions = []
           if (center && center.sessions && center.sessions.length) {
               center.sessions.forEach(session => {
-                  if ((session.available_capacity > 0) && (session.min_age_limit === job.ageLimit)) {
-                      filteredSessions.push(session)
+                  if ((session.available_capacity > 9) && (session.min_age_limit === job.ageLimit)) {
+                    if (session.available_capacity > maxSlot) maxSlot = session.available_capacity
+                    filteredSessions.push(session)
                   }
               })
           }
           if (filteredSessions.length) {
             shouldNotify=true
-            subject = 'Vaccine centre at :' + job.name + ' for age ' + job.ageLimit + ' has availability.'
+            subject = 'Maximum: ' + maxSlot + '. Vaccine centre at: ' + job.name + ' for age ' + job.ageLimit + ' has availability.'
             let formattedData = ''
             formattedData+='name: ' + job.name + '.\n'
             formattedData+='age: ' + job.ageLimit + '.\n'

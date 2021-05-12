@@ -58,7 +58,7 @@ const whatTo = [
     {
         district_id: 307,
         district_name: "Ernakulam (Kerala)",
-        min_age_limit: 18,
+        min_age_limit: 45,
         receivers: "pandey.avi8@gmail.com,alpanakabra@gmail.com"
     },
 ]
