@@ -14,6 +14,7 @@ class JobsRepo {
           toRun: item.toRun || true,
           api: this.prepareAJob(item.district_id),
           ageLimit: item.min_age_limit,
+          notifnThreshold: notifn_threshold,
           receivers: item.receivers
         }
       })
