@@ -22,7 +22,10 @@ const JobsHandler = (function () {
 
       function addToRunningJobs (data) { runningJobs.push(data) }
 
-      function addToRunningTasks (data) { runningTasks.push(data) }
+      function addToRunningTasks (data) {
+        runningJobs = runningJobs.filter(job => job.id !== data.id)
+        runningTasks.push(data)
+      }
 
       function addToJobResponses (data) { jobResponses.push(data) }
 
@@ -44,7 +47,10 @@ const JobsHandler = (function () {
       function logJobDetails (job) {
         console.log(`[JobsHandler.jobExecution] running job ${job.id} ${job.name} with cron config ${job.cronConfig}`)
         const associatedJob = getJobFromRunningJobs(job)
-        if (associatedJob && associatedJob.task) console.log(`[JobsHandler.jobExecution] ${job.id} ${job.name} will run next at ${getNextInvocation(associatedJob.task.nextInvocation())}`)
+        if (associatedJob && associatedJob.task) {
+          console.log(`[JobsHandler.jobExecution] ${job.id} ${job.name} will run next at ${getNextInvocation(associatedJob.task.nextInvocation())}`)
+          addToRunningTasks({ id: job.id, name: job.name, cronConfig: job.cronConfig, nextRun: (associatedJob.task && associatedJob.task.nextInvocation && getNextInvocation(associatedJob.task.nextInvocation())) })
+        }
       }
 
       function formatAndTriggerNotifn (data, job) {
@@ -82,6 +88,8 @@ const JobsHandler = (function () {
             subject,
             message
           )
+        } else {
+          console.log(`[JobsHandler.formatAndTriggerNotifn] job finished ${job.id} ${job.name} , no centres found.`)
         }
       } catch (error) {
         console.log(`[JobsHandler.formatAndTriggerNotifn] job finished ${job.id} ${job.name}, error while sending mail `, error)
@@ -116,9 +124,8 @@ const JobsHandler = (function () {
           const cronSchedule = !cronValidator.isValidCron(job.cronConfig) ? new Date(job.cronConfig) : job.cronConfig
           console.log(`[JobsHandler.registerCronJob] register job attempted for ${job.id} ${job.name} with cronSchedule: ${cronSchedule}`)
           const task = schedule.scheduleJob(cronSchedule, () => jobExecution(job))
-          console.log(`[JobsHandler.registerCronJob]${job.id} ${job.name} will run next at ${task.nextInvocation()}`)
+          // console.log(`[JobsHandler.registerCronJob]${job.id} ${job.name} will run next at ${task.nextInvocation()}`)
           addToRunningJobs({ id: job.id, name: job.name, cronConfig: job.cronConfig, task: task })
-          addToRunningTasks({ id: job.id, name: job.name, cronConfig: job.cronConfig,nextRun: (task && task.nextInvocation && getNextInvocation(task.nextInvocation())) })
         } else {
           console.log(`[JobsHandler.registerCronJob] job ${job && job.id} is invalid`)
         }
