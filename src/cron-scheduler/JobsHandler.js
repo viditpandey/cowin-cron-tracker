@@ -30,7 +30,7 @@ const JobsHandler = (function () {
 
       function getNextInvocation (data) {
         try {
-          return new Date(data).toLocaleString('en', {timeZone: 'IST'})
+          return new Date(data).toLocaleString('en-in', {timeZoneOffset: -330})
         } catch (error) {
           return data
         }
