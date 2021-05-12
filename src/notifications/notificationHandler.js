@@ -19,7 +19,7 @@ const NotificationHandler = {
             service: 'gmail',
             auth: {
                 user: username,
-                pass: process.env.AUTH_PASS_GMAIL
+                pass: passKey
             },
         })
     },
