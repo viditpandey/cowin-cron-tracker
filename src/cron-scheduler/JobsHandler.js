@@ -55,7 +55,7 @@ const JobsHandler = (function () {
           }
           if (filteredSessions.length) {
             shouldNotify=true
-            subject = 'Slots available: ' + job.name + ' for age ' + job.ageLimit + '.'
+            subject = 'Vaccine centre at :' + job.name + ' for age ' + job.ageLimit + ' has availability.'
             let formattedData = ''
             formattedData+='name: ' + job.name + '.\n'
             formattedData+='age: ' + job.ageLimit + '.\n'
