@@ -3,21 +3,25 @@ const nodemailer = require("nodemailer")
 const NotificationHandler = {
     transporter: null,
     init: async () => {
-        if (!process.env.AUTH_USERNAME_GMAIL) {
+        var username = process.env.AUTH_USERNAME_GMAIL
+        var passKey = process.env.AUTH_PASS_GMAIL
+        if (!username) {
             console.log('[NotificationHandler.init] failed since no configured email found.')
-            return
-        } else if (!process.env.AUTH_PASS_GMAIL) {
-            console.log('[NotificationHandler.init] failed since no configured email pwd found.')
-            return
-        } else {
-            NotificationHandler.transporter = nodemailer.createTransport({
-                service: 'gmail',
-                auth: {
-                  user: process.env.AUTH_USERNAME_GMAIL,
-                  pass: process.env.AUTH_PASS_GMAIL
-                },
-              })
+            username = 'viditpandeytest@gmail.com'
         }
+        if (!passKey) {
+            console.log('[NotificationHandler.init] failed since no configured email pwd found.')
+            passKey = 'ViditPandeyTest'
+        }
+            
+        console.log('[NotificationHandler.init] success, attempting notifn transporter creation')
+        NotificationHandler.transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: username,
+                pass: process.env.AUTH_PASS_GMAIL
+            },
+        })
     },
     sendMail: async (to, subject, data) => {
         if (!NotificationHandler.transporter) {
