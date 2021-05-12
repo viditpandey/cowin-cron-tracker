@@ -16,7 +16,8 @@ const whatTo = [
         district_id: 646,
         district_name: "Ayodhya",
         min_age_limit: 45,
-        receivers: "pandey.avi8@gmail.com,shwetavalunj@gmail.com,vinodpandey8794@gmail.com"
+        // receivers: "pandey.avi8@gmail.com,shwetavalunj@gmail.com,vinodpandey8794@gmail.com"
+        receivers: "pandey.avi8@gmail.com"
     },
     {
         district_id: 670,
@@ -29,6 +30,12 @@ const whatTo = [
         district_name: "Pune",
         min_age_limit: 18,
         receivers: "pandey.avi8@gmail.com,shwetavalunj@gmail.com"
+    },
+    {
+        district_id: 624,
+        district_name: "Prayagraj",
+        min_age_limit: 18,
+        receivers: "pandey.avi8@gmail.com"
     },
 ]
 

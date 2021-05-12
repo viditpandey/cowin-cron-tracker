@@ -10,6 +10,7 @@ const JobsHandler = (function () {
     const repo = new JobsRepo()
     NotificationHandler.init();
     var runningJobs = []
+    var runningTasks = []
     var jobResponses = []
     var errorResponses = []
 
@@ -19,11 +20,13 @@ const JobsHandler = (function () {
         return true
       }
 
-      function addToRunningJobs (task) { runningJobs.push(task) }
+      function addToRunningJobs (data) { runningJobs.push(data) }
 
-      function addToJobResponses (task) { jobResponses.push(task) }
+      function addToRunningTasks (data) { runningTasks.push(data) }
 
-      function addToErrorResponses (task) { errorResponses.push(task) }
+      function addToJobResponses (data) { jobResponses.push(data) }
+
+      function addToErrorResponses (data) { errorResponses.push(data) }
 
       function getJobFromRunningJobs (job) {
         if (!job || !job.id) return null
@@ -38,7 +41,7 @@ const JobsHandler = (function () {
 
       function formatAndTriggerNotifn (data, job) {
         if (!data || data.length === 0) return
-        var message = ''
+        var message = 'https://selfregistration.cowin.gov.in/ \n'
         var subject = ''
         var shouldNotify = false
         data.forEach(center => {
@@ -106,14 +109,15 @@ const JobsHandler = (function () {
           console.log(`[JobsHandler.registerCronJob] register job attempted for ${job.id} ${job.name} with cronSchedule: ${cronSchedule}`)
           const task = schedule.scheduleJob(cronSchedule, () => jobExecution(job))
           console.log(`[JobsHandler.registerCronJob]${job.id} ${job.name} will run next at ${task.nextInvocation()}`)
-          addToRunningJobs({ id: job.id, status: task.status, cronConfig: job.cronConfig, task: task })
+          addToRunningJobs({ id: job.id, name: job.name, cronConfig: job.cronConfig, task: task })
+          addToRunningTasks({ id: job.id, name: job.name, cronConfig: job.cronConfig,nextRun: (task && task.nextInvocation && task.nextInvocation()) })
         } else {
           console.log(`[JobsHandler.registerCronJob] job ${job && job.id} is invalid`)
         }
       }
 
     return {
-        getRunningJobs: () => runningJobs,
+        getRunningTasks: () => runningTasks,
         getJobResponses: () => jobResponses,
         getErrorResponses: () => errorResponses,
         checkAndRegisterNewJobs: function () {
