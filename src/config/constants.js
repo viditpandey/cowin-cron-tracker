@@ -43,6 +43,12 @@ const whatTo = [
         min_age_limit: 18,
         receivers: "pandey.avi8@gmail.com,yatharthdeoly@gmail.com"
     },
+    {
+        district_id: 179,
+        district_name: "Anand (Gujarat)",
+        min_age_limit: 18,
+        receivers: "pandey.avi8@gmail.com,kinjalparmar1992@gmail.com"
+    },
 ]
 
 const whereTo = {
