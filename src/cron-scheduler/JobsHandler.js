@@ -63,7 +63,7 @@ const JobsHandler = (function () {
           const filteredSessions = []
           if (center && center.sessions && center.sessions.length) {
               center.sessions.forEach(session => {
-                  if ((session.available_capacity > 9) && (session.min_age_limit === job.ageLimit)) {
+                  if ((session.available_capacity > 4) && (session.min_age_limit === job.ageLimit)) {
                     if (session.available_capacity > maxSlot) maxSlot = session.available_capacity
                     filteredSessions.push(session)
                   }
