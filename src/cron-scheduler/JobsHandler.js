@@ -91,7 +91,7 @@ const JobsHandler = (function () {
            console.log(`[JobsHandler.formatAndTriggerNotifn] job ${job.id} ${job.name} faced some error while formatting response data, error: `, error) 
           }
       })
-      const jobLog = `${job.id} ${job.name} ran at ${getTimeInIST(new Date())}, total slots: ${totalSlots}, max slot: ${maxSlot}.    `
+      const jobLog = `${job.id} ${job.name} ran at ${getTimeInIST(new Date())}, total slots: ${totalSlots}, max slot: ${maxSlot}.`
       console.log(jobLog)
       addToJobResponses(jobLog)
 
