@@ -27,19 +27,16 @@ const JobsHandler = (function () {
         runningTasks.push(data)
       }
 
-      function addLogToJob (log, id) {
-        runningTasks.forEach(job => {
-          if (job.id === id) job.latestRunLog = log
-        })
+      function addToJobResponses (data) {
+        if (jobResponses.length >= runningJobs.length) jobResponses.shift() 
+        jobResponses.push(data)
       }
-
-      function addToJobResponses (data) { jobResponses.push(data) }
 
       function addToErrorResponses (data) { errorResponses.push(data) }
 
-      function getNextInvocation (data) {
+      function getTimeInIST (data) {
         try {
-          return new Date(data).toLocaleString('en-in', {timeZoneOffset: -330})
+          return new Date(data).toLocaleString('en-in', {timeZone: 'Asia/Calcutta'})
         } catch (error) {
           return data
         }
@@ -47,15 +44,16 @@ const JobsHandler = (function () {
 
       function getJobFromRunningJobs (job) {
         if (!job || !job.id) return null
-        return runningJobs.find(i => i.topologyId === job.topologyId)
+        return runningJobs.find(i => i.id === job.id)
       }
 
       function logJobDetails (job) {
         console.log(`[JobsHandler.jobExecution] running job ${job.id} ${job.name} with cron config ${job.cronConfig}`)
         const associatedJob = getJobFromRunningJobs(job)
         if (associatedJob && associatedJob.task) {
-          console.log(`[JobsHandler.jobExecution] ${job.id} ${job.name} will run next at ${getNextInvocation(associatedJob.task.nextInvocation())}`)
-          addToRunningTasks({ id: job.id, name: job.name, cronConfig: job.cronConfig, nextRun: (associatedJob.task && associatedJob.task.nextInvocation && getNextInvocation(associatedJob.task.nextInvocation())) })
+          const nextSchedule = getTimeInIST(associatedJob.task.nextInvocation())
+          console.log(`[JobsHandler.jobExecution] ${job.id} ${job.name} will run next at ${nextSchedule}`)
+          addToRunningTasks({ id: job.id, name: job.name, nextRun: (getTimeInIST(nextSchedule)) })
         }
       }
 
@@ -88,20 +86,19 @@ const JobsHandler = (function () {
               formattedData+='details: ' + center.name + ' at ' + center.address + '.\n'
               formattedData+='sessions: ' + (filteredSessions.map(sesh => `${sesh.date} (avaiable slots = ${sesh.available_capacity})`)).join(', ') + '.\n\n'
               message+=formattedData
-              addToJobResponses(formattedData)
             }
           } catch (error) {
            console.log(`[JobsHandler.formatAndTriggerNotifn] job ${job.id} ${job.name} faced some error while formatting response data, error: `, error) 
           }
       })
-      const jobLog = `[JobsHandler.formatAndTriggerNotifn] job finished ${job.id} ${job.name} , no centres. available, if any: (${totalSlots}):`
+      const jobLog = `${job.id} ${job.name} ran at ${getTimeInIST(new Date())}, total slots: ${totalSlots}, max slot: ${maxSlot}.    `
       console.log(jobLog)
-      addLogToJob(jobLog, job.id)
+      addToJobResponses(jobLog)
 
       try {
         const notifnThreshold = job.notifnThreshold || 4
         if (shouldNotify && (totalSlots > notifnThreshold)) {
-          console.log(`[JobsHandler.formatAndTriggerNotifn] job finished ${job.id} ${job.name} , sending mail to ${job.receivers}.`)
+          console.log(`[JobsHandler.formatAndTriggerNotifn] ${job.id} ${job.name} , sending ${subject} mail to ${job.receivers}.`)
           NotificationHandler.sendMail(
             job.receivers,
             subject,
@@ -141,7 +138,7 @@ const JobsHandler = (function () {
           const cronSchedule = !cronValidator.isValidCron(job.cronConfig) ? new Date(job.cronConfig) : job.cronConfig
           console.log(`[JobsHandler.registerCronJob] register job attempted for ${job.id} ${job.name} with cronSchedule: ${cronSchedule}`)
           const task = schedule.scheduleJob(cronSchedule, () => jobExecution(job))
-          console.log(`[JobsHandler.registerCronJob] register job done for ${job.id} ${job.name} with next run at: ${getNextInvocation(task.nextInvocation())}`)
+          console.log(`[JobsHandler.registerCronJob] register job done for ${job.id} ${job.name} with next run at: ${getTimeInIST(task.nextInvocation())}`)
           addToRunningJobs({ id: job.id, name: job.name, cronConfig: job.cronConfig, task: task })
         } else {
           console.log(`[JobsHandler.registerCronJob] job ${job && job.id} is invalid`)
