@@ -7,13 +7,13 @@ const NotificationHandler = {
         var passKey = process.env.AUTH_PASS_GMAIL
         if (!username) {
             console.log('[NotificationHandler.init] failed since no configured email found.')
-            username = 'viditpandeytest@gmail.com'
+            return
         }
         if (!passKey) {
             console.log('[NotificationHandler.init] failed since no configured email pwd found.')
-            passKey = 'ViditPandeyTest'
+            return
         }
-            
+
         console.log('[NotificationHandler.init] success, attempting notifn transporter creation')
         NotificationHandler.transporter = nodemailer.createTransport({
             service: 'gmail',

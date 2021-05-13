@@ -27,6 +27,12 @@ const JobsHandler = (function () {
         runningTasks.push(data)
       }
 
+      function addLogToJob (log, id) {
+        runningTasks.forEach(job => {
+          if (job.id === id) job.latestRunLog = log
+        })
+      }
+
       function addToJobResponses (data) { jobResponses.push(data) }
 
       function addToErrorResponses (data) { errorResponses.push(data) }
@@ -88,6 +94,9 @@ const JobsHandler = (function () {
            console.log(`[JobsHandler.formatAndTriggerNotifn] job ${job.id} ${job.name} faced some error while formatting response data, error: `, error) 
           }
       })
+      const jobLog = `[JobsHandler.formatAndTriggerNotifn] job finished ${job.id} ${job.name} , no centres. available, if any: (${totalSlots}):`
+      console.log(jobLog)
+      addLogToJob(jobLog, job.id)
 
       try {
         const notifnThreshold = job.notifnThreshold || 4
@@ -98,8 +107,6 @@ const JobsHandler = (function () {
             subject,
             message
           )
-        } else {
-          console.log(`[JobsHandler.formatAndTriggerNotifn] job finished ${job.id} ${job.name} , no centres. available, if any: (${totalSlots}):`)
         }
       } catch (error) {
         console.log(`[JobsHandler.formatAndTriggerNotifn] job finished ${job.id} ${job.name}, error while sending mail `, error)
