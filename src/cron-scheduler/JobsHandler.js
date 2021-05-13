@@ -61,27 +61,31 @@ const JobsHandler = (function () {
         var totalSlots = 0;
         var shouldNotify = false
         data.forEach(center => {
-          const filteredSessions = []
-          if (center && center.sessions && center.sessions.length) {
-              center.sessions.forEach(session => {
-                if ((session.available_capacity > 0) && (session.min_age_limit === job.ageLimit)) {
-                  totalSlots+=session.available_capacity
-                  if (session.available_capacity > maxSlot) maxSlot = session.available_capacity
-                  filteredSessions.push(session)
-                }
-              })
-          }
-          if (filteredSessions.length) {
-            shouldNotify=true
-            subject = `Maximum: ${maxSlot}, Total: ${totalSlots}. Vaccine centre at: ${job.name} for age ${job.ageLimit} has availability.`
-              // subject = 'Maximum: ' + maxSlot + '. Vaccine centre at: ' + job.name + ' for age ' + job.ageLimit + ' has availability.' 
-            let formattedData = ''
-            formattedData+='name: ' + job.name + '.\n'
-            formattedData+='age: ' + job.ageLimit + '.\n'
-            formattedData+='details: ' + center.name + ' at ' + center.address + '.\n'
-            formattedData+='sessions: ' + (filteredSessions.map(sesh => `${sesh.date} (avaiable slots = ${sesh.available_capacity})`)).join(', ') + '.\n\n'
-            message+=formattedData
-            addToJobResponses(formattedData)
+          try {
+            const filteredSessions = []
+            if (center && center.sessions && center.sessions.length) {
+                center.sessions.forEach(session => {
+                  if ((session.available_capacity > 0) && (session.min_age_limit === job.ageLimit)) {
+                    totalSlots+=session.available_capacity
+                    if (session.available_capacity > maxSlot) maxSlot = session.available_capacity
+                    filteredSessions.push(session)
+                  }
+                })
+            }
+            if (filteredSessions.length) {
+              shouldNotify=true
+              subject = `Maximum: ${maxSlot}, Total: ${totalSlots}. Vaccine centre at: ${job.name} for age ${job.ageLimit} has availability.`
+                // subject = 'Maximum: ' + maxSlot + '. Vaccine centre at: ' + job.name + ' for age ' + job.ageLimit + ' has availability.' 
+              let formattedData = ''
+              formattedData+='name: ' + job.name + '.\n'
+              formattedData+='age: ' + job.ageLimit + '.\n'
+              formattedData+='details: ' + center.name + ' at ' + center.address + '.\n'
+              formattedData+='sessions: ' + (filteredSessions.map(sesh => `${sesh.date} (avaiable slots = ${sesh.available_capacity})`)).join(', ') + '.\n\n'
+              message+=formattedData
+              addToJobResponses(formattedData)
+            }
+          } catch (error) {
+           console.log(`[JobsHandler.formatAndTriggerNotifn] job ${job.id} ${job.name} faced some error while formatting response data, error: `, error) 
           }
       })
 
@@ -95,7 +99,7 @@ const JobsHandler = (function () {
             message
           )
         } else {
-          console.log(`[JobsHandler.formatAndTriggerNotifn] job finished ${job.id} ${job.name} , no centres found.`)
+          console.log(`[JobsHandler.formatAndTriggerNotifn] job finished ${job.id} ${job.name} , no centres. available, if any: (${totalSlots}):`)
         }
       } catch (error) {
         console.log(`[JobsHandler.formatAndTriggerNotifn] job finished ${job.id} ${job.name}, error while sending mail `, error)
