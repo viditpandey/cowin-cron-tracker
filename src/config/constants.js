@@ -65,9 +65,15 @@ const whatTo = [
     {
         district_id: 453,
         district_name: "Sundargarh (Odisha)",
-        notifn_threshold: 1,
+        // notifn_threshold: 1,
         min_age_limit: 18,
         receivers: "pandey.avi8@gmail.com,i.chhatwani29@gmail.com"
+    },
+    {
+        district_id: 265,
+        district_name: "Bangalore Urban (Karnataka)",
+        min_age_limit: 18,
+        receivers: "pandey.avi8@gmail.com,amitsrathore16@gmail.com"
     },
 ]
 
