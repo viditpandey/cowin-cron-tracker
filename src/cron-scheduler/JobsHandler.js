@@ -99,11 +99,12 @@ const JobsHandler = (function () {
         const notifnThreshold = job.notifnThreshold || 4
         if (shouldNotify && (totalSlots > notifnThreshold)) {
           console.log(`[JobsHandler.formatAndTriggerNotifn] ${job.id} ${job.name} , sending ${subject} mail to ${job.receivers}.`)
-          NotificationHandler.sendMail(
-            job.receivers,
-            subject,
-            message
-          )
+          // NotificationHandler.sendMail(
+          //   job.receivers,
+          //   subject,
+          //   message
+          // )
+          NotificationHandler.sendPush(job.id, subject, '')
         }
       } catch (error) {
         console.log(`[JobsHandler.formatAndTriggerNotifn] job finished ${job.id} ${job.name}, error while sending mail `, error)

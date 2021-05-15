@@ -1,7 +1,9 @@
 const nodemailer = require("nodemailer")
+const webpush = require('web-push');
 
 const NotificationHandler = {
     transporter: null,
+    notifiersByJobId: {},
     init: async () => {
         var username = process.env.AUTH_USERNAME_GMAIL
         var passKey = process.env.AUTH_PASS_GMAIL
@@ -36,6 +38,25 @@ const NotificationHandler = {
             text: data,
         });
         console.log('info>>>>>>>', info.response)
+    },
+    registerForPushNotifns: function (jobId, subscription) {
+        console.log('[NotificationHandler.registerForPushNotifns] started for: ', jobId, subscription)
+        if (!this.notifiersByJobId[jobId]) this.notifiersByJobId[jobId] = []
+        this.notifiersByJobId[jobId].push(subscription)
+        const payload = JSON.stringify({ title: 'notified?', body: `you will now be notified for: 'Ayodhya'` })
+        webpush.sendNotification(subscription, payload).catch(error => {
+            console.error('[NotificationHandler.registerForPushNotifns] error while sending push notifications', error.stack);
+        })
+    },
+    sendPush: function (jobId, title, message) {
+        console.log('[NotificationHandler.sendPush] initiating for: ', jobId)
+        if (!this.notifiersByJobId[jobId]) this.notifiersByJobId[jobId] = []
+        const payload = JSON.stringify({ title, body: message || 'Please check  your mail/spam for center details.' })
+        this.notifiersByJobId[jobId].forEach(subscription => {
+            webpush.sendNotification(subscription, payload).catch(error => {
+                console.error('[server.handleRequests] error while sending push notifications', error.stack);
+            })
+        })
     }
 }
 
