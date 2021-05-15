@@ -3,7 +3,7 @@ const BASE_URL = 'https://cdn-api.co-vin.in/api'
 const checkNewJobsInterval = '* * * * * *'
 
 // const pollingCronInterval = '* * * * *'
-const pollingCronInterval = '*/5 1-18 * * *'
+const pollingCronInterval = '*/15 1-18 * * *'
 
 const whatTo = [
     {
