@@ -2,10 +2,11 @@ const nodemailer = require("nodemailer")
 const webpush = require('web-push');
 const JobsRepo = require("../cron-scheduler/repo/JobsRepo");
 const jobsRepo = new JobsRepo();
+const configs = require('../config/constants')
 
 const NotificationHandler = {
     transporter: null,
-    notifiersByJobId: {},
+    notifiersByJobId: configs.notifiersByJobId || {},
     init: async () => {
         var username = process.env.AUTH_USERNAME_GMAIL
         var passKey = process.env.AUTH_PASS_GMAIL

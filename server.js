@@ -44,6 +44,11 @@ app.get('/responses', (req, res) => {
   res.end()
 })
 
+app.get('/web-push-subscribers', (req, res) => {
+  const jobResponses = NotificationHandler.notifiersByJobId;
+  res.status(200).json({ data: jobResponses })
+})
+
 app.get('/getJob', (req, res) => {
   // const query = req.url.split('/getJob?')[1]
   const query = req.query
