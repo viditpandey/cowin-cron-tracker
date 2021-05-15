@@ -47,7 +47,6 @@ app.get('/responses', (req, res) => {
 app.get('/getJob', (req, res) => {
   // const query = req.url.split('/getJob?')[1]
   const query = req.query
-  console.log('>>>>>>>>>>>>>query', query)
   axios.get(
     configs.whereTo.getCalendarSlotsV2(query), {
       headers: {
