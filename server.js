@@ -22,8 +22,6 @@ app.post('/subscribe', (req, res) => {
   
   const payload = JSON.stringify({ title: 'test', body: 'from backend' });
 
-  console.log(subscription);
-
   NotificationHandler.registerForPushNotifns(jobId, subscription)
 
   // webpush.sendNotification(subscription, payload).catch(error => {

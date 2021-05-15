@@ -25,6 +25,15 @@ class JobsRepo {
     }
   }
 
+  findAJobById (id) {
+    try {
+      const x = configs.whatTo.find(i => `${i.district_id}_${i.min_age_limit}` === id.toString())
+      return x.district_name
+    } catch (error) {
+      return (id || ' your selected district.')
+    }
+  }
+
   prepareAJob (district_id) {
     const dateString = `${new Date().getDate()}-${(new Date().getMonth() + 1)}-${new Date().getFullYear()}`
     return configs.whereTo.getCalendarSlots(district_id, dateString)
