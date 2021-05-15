@@ -36,7 +36,8 @@ class JobsRepo {
 
   prepareAJob (district_id) {
     const dateString = `${new Date().getDate()}-${(new Date().getMonth() + 1)}-${new Date().getFullYear()}`
-    return process.env.IS_AWS ? configs.whereTo.getCalendarSlots(district_id, dateString) : configs.whereTo.getCalendarSlotsv3(district_id, dateString)
+    return configs.whereTo.getCalendarSlots(district_id, dateString)
+    // return process.env.IS_AWS ? configs.whereTo.getCalendarSlots(district_id, dateString) : configs.whereTo.getCalendarSlotsv3(district_id, dateString)
   }
 }
 
