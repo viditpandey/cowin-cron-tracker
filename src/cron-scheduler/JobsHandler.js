@@ -110,12 +110,22 @@ const JobsHandler = (function () {
       }
     }
 
+    function getJobAPI (job) {
+      try {
+        const stringId = job.id.toString()
+        const id = stringId.split('_')[0]
+        return repo.prepareAJob(id)
+      } catch (error) {
+        return job.api
+      }
+    }
+
       async function jobExecution (job) {
         try {
             logJobDetails(job)
             // call API from here
             const res = await axios.get(
-                job.api, {
+              getJobAPI(job), {
                     headers: {
                         "Accept": '*/*',
                         "User-Agent": 'Mozilla/5.0 (Macintosh Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
