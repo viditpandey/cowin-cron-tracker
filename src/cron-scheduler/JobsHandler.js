@@ -132,9 +132,11 @@ const JobsHandler = (function () {
     async function jobExecution (job) {
       try {
           logJobDetails(job)
+          const url = getJobAPI(job)
+          console.log('url is: ', url)
           // call API from here
           const res = await axios.get(
-            getJobAPI(job), {
+            url, {
               headers: {
                 "Accept": '*/*',
               }

@@ -1,3 +1,4 @@
+const AWS_URL = 'http://cowin-cron-tracker.ap-south-1.elasticbeanstalk.com/getJob'
 const BASE_URL = 'https://cdn-api.co-vin.in/api'
 
 const checkNewJobsInterval = '* * * * * *'
@@ -81,6 +82,7 @@ const whereTo = {
     getStates: `${BASE_URL}/v2/admin/location/states`,
     getDistricts: (state_id) => `${BASE_URL}/v2/admin/location/districts/${state_id}`,
     getCalendarSlots: (district_id, date) => `${BASE_URL}/v2/appointment/sessions/public/calendarByDistrict?district_id=${district_id}&date=${date}`,
+    getCalendarSlotsv3: (district_id, date) => `${AWS_URL}?district_id=${district_id}&date=${date}`
 }
 
 const configs = {
