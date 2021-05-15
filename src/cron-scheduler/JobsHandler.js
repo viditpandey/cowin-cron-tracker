@@ -111,39 +111,57 @@ const JobsHandler = (function () {
       }
     }
 
-      async function jobExecution (job) {
-        try {
-            logJobDetails(job)
-            // call API from here
-            const res = await axios.get(
-                job.api, {
-                    headers: {
-                        "Accept": '*/*',
-                    }
-                }).catch(error => {
-                console.log('[JobsHandler.jobExecution] catch block error while api call, error: ', error, error.statusCode, error.statusMessage)
-                addToErrorResponses(error)
-            })
+    async function cowinAWSProxy(query) {
+     try {
+       
+     } catch (error) {
+       
+     } 
+    }
 
-            formatAndTriggerNotifn (res.data.centers, job)
-
-        } catch (error) {
-          return false
-        }
+    function getJobAPI (job) {
+      try {
+        const stringId = job.id.toString()
+        const id = stringId.split('_')[0]
+        return repo.prepareAJob(id)
+      } catch (error) {
+        return job.api
       }
+    }
 
-      function registerCronJob (job) {
-        const isJobValid = verifyJob(job)
-        if (isJobValid) {
-          const cronSchedule = !cronValidator.isValidCron(job.cronConfig) ? new Date(job.cronConfig) : job.cronConfig
-          console.log(`[JobsHandler.registerCronJob] register job attempted for ${job.id} ${job.name} with cronSchedule: ${cronSchedule}`)
-          const task = schedule.scheduleJob(cronSchedule, () => jobExecution(job))
-          console.log(`[JobsHandler.registerCronJob] register job done for ${job.id} ${job.name} with next run at: ${getTimeInIST(task.nextInvocation())}`)
-          addToRunningJobs({ id: job.id, name: job.name, cronConfig: job.cronConfig, task: task })
-        } else {
-          console.log(`[JobsHandler.registerCronJob] job ${job && job.id} is invalid`)
-        }
+    async function jobExecution (job) {
+      try {
+          logJobDetails(job)
+          // call API from here
+          const res = await axios.get(
+            getJobAPI(job), {
+              headers: {
+                "Accept": '*/*',
+              }
+            }).catch(error => {
+            console.log('[JobsHandler.jobExecution] catch block error while api call, error: ', error, error.statusCode, error.statusMessage)
+            addToErrorResponses(error)
+        })
+
+        formatAndTriggerNotifn (res.data.centers, job)
+
+      } catch (error) {
+        return false
       }
+    }
+
+    function registerCronJob (job) {
+      const isJobValid = verifyJob(job)
+      if (isJobValid) {
+        const cronSchedule = !cronValidator.isValidCron(job.cronConfig) ? new Date(job.cronConfig) : job.cronConfig
+        console.log(`[JobsHandler.registerCronJob] register job attempted for ${job.id} ${job.name} with cronSchedule: ${cronSchedule}`)
+        const task = schedule.scheduleJob(cronSchedule, () => jobExecution(job))
+        console.log(`[JobsHandler.registerCronJob] register job done for ${job.id} ${job.name} with next run at: ${getTimeInIST(task.nextInvocation())}`)
+        addToRunningJobs({ id: job.id, name: job.name, cronConfig: job.cronConfig, task: task })
+      } else {
+        console.log(`[JobsHandler.registerCronJob] job ${job && job.id} is invalid`)
+      }
+    }
 
     return {
         getRunningTasks: () => runningTasks,
