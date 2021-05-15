@@ -82,7 +82,8 @@ const whereTo = {
     getStates: `${BASE_URL}/v2/admin/location/states`,
     getDistricts: (state_id) => `${BASE_URL}/v2/admin/location/districts/${state_id}`,
     getCalendarSlots: (district_id, date) => `${BASE_URL}/v2/appointment/sessions/public/calendarByDistrict?district_id=${district_id}&date=${date}`,
-    getCalendarSlotsv3: (district_id, date) => `${AWS_URL}?district_id=${district_id}&date=${date}`
+    getCalendarSlotsv3: (district_id, date) => `${AWS_URL}?district_id=${district_id}&date=${date}`,
+    getCalendarSlotsV2: (query) => `${BASE_URL}/v2/appointment/sessions/public/calendarByDistrict?${query}`,
 }
 
 const configs = {

@@ -1,9 +1,10 @@
 const express = require('express')
+const axios = require('axios')
 const SchedulerManager = require('./src/cron-scheduler/SchedulerManager')
 const NotificationHandler = require('./src/notifications/notificationHandler')
 const JobsHandler = require('./src/cron-scheduler/JobsHandler')
 const ServerUtils = require('./src/utils/serverUtils')
-// const webpush = require('web-push');
+const configs = require('./src/config/constants')
 
 const DEFAULT_PORT = 8080
 
@@ -43,6 +44,32 @@ app.get('/responses', (req, res) => {
   res.end()
 })
 
+app.get('/getJob', (req, res) => {
+  // const query = req.url.split('/getJob?')[1]
+  const query = req.query
+  console.log('>>>>>>>>>>>>>query', query)
+  axios.get(
+    configs.whereTo.getCalendarSlotsV2(query), {
+      headers: {
+        "Accept": '*/*',
+        "User-Agent": 'Mozilla/5.0 (Macintosh Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
+      }
+  })
+  .then(response => {
+    console.log(typeof response)
+    res.writeHead(200)
+    res.write(JSON.stringify(response.data))
+    res.end()
+  })
+  .catch(error => {
+    console.log('[JobsHandler.jobExecution] catch block error while api call, error: ', error, error.statusCode, error.statusMessage)
+    addToErrorResponses(error)
+    res.writeHead(502)
+    res.write(JSON.stringify(error))
+    res.end()
+  })
+})
+
 app.get('/tasks', (req, res) => {
   const runningTasks = JobsHandler.getRunningTasks()
   res.writeHead(200)
@@ -51,10 +78,6 @@ app.get('/tasks', (req, res) => {
 })
 
 app.use(require('express-static')('./'))
-
-// app.get('/*', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'dist/index.html'))
-// })
 
 app.listen(process.env.PORT || DEFAULT_PORT, function () {
   SchedulerManager.initialize()
@@ -93,7 +116,30 @@ app.listen(process.env.PORT || DEFAULT_PORT, function () {
 //     webpush.sendNotification(subscription, payload).catch(error => {
 //       console.error('[server.handleRequests] error while sending push notifications', error.stack);
 //     });
-//   } else {
+//   } } else if (req.url.search('/getJob') !== -1) {
+  //   const query = req.url.split('/getJob?')[1]
+  //   axios.get(
+  //     configs.whereTo.getCalendarSlotsV2(query), {
+  //       headers: {
+  //         "Accept": '*/*',
+  //         "User-Agent": 'Mozilla/5.0 (Macintosh Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
+  //       }
+  //     })
+  //     .then(response => {
+  //       console.log(typeof response)
+  //       res.writeHead(200)
+  //       res.write(JSON.stringify(response.data))
+  //       res.end()
+  //     })
+  //     .catch(error => {
+  //       console.log('[JobsHandler.jobExecution] catch block error while api call, error: ', error, error.statusCode, error.statusMessage)
+  //       addToErrorResponses(error)
+  //       res.writeHead(502)
+  //       res.write(JSON.stringify(error))
+  //       res.end()
+  //     })
+
+  // } else {
 //     const runningTasks = JobsHandler.getRunningTasks()
 //     res.writeHead(200)
 //     res.write(`The node cron is running with following jobs running: \n ${JSON.stringify(runningTasks)}`)

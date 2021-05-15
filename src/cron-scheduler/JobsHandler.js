@@ -111,14 +111,6 @@ const JobsHandler = (function () {
       }
     }
 
-    async function cowinAWSProxy(query) {
-     try {
-       
-     } catch (error) {
-       
-     } 
-    }
-
     function getJobAPI (job) {
       try {
         const stringId = job.id.toString()
