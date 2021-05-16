@@ -6,12 +6,12 @@ const checkNewJobsInterval = '* * * * * *'
 const pollingCronInterval = '*/15 1-18 * * *'
 
 const whatTo = [
-    // {
-    //     district_id: 646,
-    //     district_name: "Ayodhya (UP)",
-    //     min_age_limit: 18,
-    //     receivers: "pandey.avi8@gmail.com,yadavshubham20091994@gmail.com,"
-    // },
+    {
+        district_id: 646,
+        district_name: "Ayodhya (UP)",
+        min_age_limit: 18,
+        receivers: "pandey.avi8@gmail.com,yadavshubham20091994@gmail.com,"
+    },
     // {
     //     district_id: 646,
     //     district_name: "Ayodhya (UP)",
@@ -31,12 +31,12 @@ const whatTo = [
         min_age_limit: 18,
         receivers: "pandey.avi8@gmail.com,shwetavalunj@gmail.com,arnavmo@gmail.com,kalburgishraddha@gmail.com"
     },
-    {
-        district_id: 624,
-        district_name: "Prayagraj (UP)",
-        min_age_limit: 18,
-        receivers: "pandey.avi8@gmail.com,shalabhms13@gmail.com"
-    },
+    // {
+    //     district_id: 624,
+    //     district_name: "Prayagraj (UP)",
+    //     min_age_limit: 18,
+    //     receivers: "pandey.avi8@gmail.com"
+    // },
     // {
     //     district_id: 697,
     //     district_name: "Dehradun (UK)",
