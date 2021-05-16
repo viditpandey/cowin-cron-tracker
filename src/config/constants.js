@@ -23,7 +23,7 @@ const whatTo = [
         district_id: 670,
         district_name: "Lucknow(UP)",
         min_age_limit: 18,
-        receivers: "pandey.avi8@gmail.com,siddhartha.Sehgal94@gmail.com,nmt.1615@gmail.com,aparajit35@gmail.com,chatterjee.raju@rediffmail.com"
+        receivers: "pandey.avi8@gmail.com,nmt.1615@gmail.com,aparajit35@gmail.com,chatterjee.raju@rediffmail.com"
     },
     {
         district_id: 363,

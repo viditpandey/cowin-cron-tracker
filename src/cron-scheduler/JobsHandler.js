@@ -78,7 +78,7 @@ const JobsHandler = (function () {
             }
             if (filteredSessions.length) {
               shouldNotify=true
-              subject = `Maximum: ${maxSlot}, Total: ${totalSlots}. Vaccine centre at: ${job.name} for age ${job.ageLimit} has availability.`
+              subject = `Maximum: ${maxSlot}, Total: ${totalSlots}, for COVID Vaccine centres at: ${job.name} for age ${job.ageLimit}.`
                 // subject = 'Maximum: ' + maxSlot + '. Vaccine centre at: ' + job.name + ' for age ' + job.ageLimit + ' has availability.' 
               let formattedData = ''
               formattedData+='name: ' + job.name + '.\n'
