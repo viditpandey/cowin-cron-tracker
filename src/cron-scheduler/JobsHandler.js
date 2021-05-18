@@ -53,7 +53,7 @@ const JobsHandler = (function () {
         if (associatedJob && associatedJob.task) {
           const nextSchedule = getTimeInIST(associatedJob.task.nextInvocation())
           console.log(`[JobsHandler.jobExecution] ${job.id} ${job.name} will run next at ${nextSchedule}`)
-          addToRunningTasks({ id: job.id, name: job.name, nextRun: (getTimeInIST(nextSchedule)) })
+          addToRunningTasks({ id: job.id, name: job.name, nextRun: (getTimeInIST(nextSchedule)), apiCalled: job.apiCalled })
         }
       }
 
@@ -122,10 +122,11 @@ const JobsHandler = (function () {
 
       async function jobExecution (job) {
         try {
-            logJobDetails(job)
+          const url = getJobAPI(job)
+            logJobDetails({...job, apiCalled: url})
             // call API from here
             const res = await axios.get(
-              getJobAPI(job), {
+              url, {
                     headers: {
                         "Accept": '*/*',
                         "User-Agent": 'Mozilla/5.0 (Macintosh Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
