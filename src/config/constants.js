@@ -3,7 +3,7 @@ const BASE_URL = 'https://cdn-api.co-vin.in/api'
 const checkNewJobsInterval = '* * * * * *'
 
 // const pollingCronInterval = '* * * * *'
-const pollingCronInterval = '*/30 1-17 * * *'
+const pollingCronInterval = '*/15 1-17 * * *'
 
 const whatTo = [
     // {
@@ -25,12 +25,6 @@ const whatTo = [
     //     min_age_limit: 18,
     //     receivers: "pandey.avi8@gmail.com,nmt.1615@gmail.com,aparajit35@gmail.com,chatterjee.raju@rediffmail.com"
     // },
-    {
-        district_id: 363,
-        district_name: "Pune (Maharashtra)",
-        min_age_limit: 18,
-        receivers: "pandey.avi8@gmail.com,shwetavalunj@gmail.com,arnavmo@gmail.com,kalburgishraddha@gmail.com"
-    },
     // {
     //     district_id: 624,
     //     district_name: "Prayagraj (UP)",
@@ -43,6 +37,12 @@ const whatTo = [
     //     min_age_limit: 18,
     //     receivers: "pandey.avi8@gmail.com,yatharthdeoly@gmail.com"
     // },
+    {
+        district_id: 363,
+        district_name: "Pune (Maharashtra)",
+        min_age_limit: 18,
+        receivers: "pandey.avi8@gmail.com,shwetavalunj@gmail.com,arnavmo@gmail.com,kalburgishraddha@gmail.com"
+    },
     {
         district_id: 179,
         district_name: "Anand (Gujarat)",
@@ -65,7 +65,7 @@ const whatTo = [
     {
         district_id: 453,
         district_name: "Sundargarh (Odisha)",
-        // notifn_threshold: 1,
+        dose: "available_capacity_dose1",
         min_age_limit: 45,
         receivers: "pandey.avi8@gmail.com,i.chhatwani29@gmail.com"
     },

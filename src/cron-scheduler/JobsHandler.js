@@ -72,7 +72,9 @@ const JobsHandler = (function () {
                   if ((session.available_capacity > 0) && (session.min_age_limit === job.ageLimit)) {
                     totalSlots+=session.available_capacity
                     if (session.available_capacity > maxSlot) maxSlot = session.available_capacity
-                    filteredSessions.push(session)
+                    if (job.dose && session[job.dose] > 0) {
+                      filteredSessions.push(session)
+                    } else { filteredSessions.push(session) }
                   }
                 })
             }
@@ -99,7 +101,7 @@ const JobsHandler = (function () {
         const notifnThreshold = job.notifnThreshold || 4
         if (shouldNotify && (totalSlots > notifnThreshold)) {
           console.log(`[JobsHandler.formatAndTriggerNotifn] ${job.id} ${job.name} , sending ${subject} mail to ${job.receivers}.`)
-          NotificationHandler.sendMail(
+          !process.env.NO_MAIL && NotificationHandler.sendMail(
             job.receivers,
             subject,
             message

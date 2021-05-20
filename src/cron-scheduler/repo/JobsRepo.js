@@ -10,6 +10,7 @@ class JobsRepo {
         return {
           id: `${item.district_id}_${item.min_age_limit}`,
           name: item.district_name || '',
+          dose: item.dose,
           cronConfig: rule,
           toRun: item.toRun || true,
           api: this.prepareAJob(item.district_id),
