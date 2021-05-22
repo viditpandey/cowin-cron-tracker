@@ -53,7 +53,7 @@ const JobsHandler = (function () {
         if (associatedJob && associatedJob.task) {
           const nextSchedule = getTimeInIST(associatedJob.task.nextInvocation())
           console.log(`[JobsHandler.jobExecution] ${job.id} ${job.name} will run next at ${nextSchedule}`)
-          addToRunningTasks({ id: job.id, name: job.name, nextRun: (getTimeInIST(nextSchedule)) })
+          addToRunningTasks({ id: job.id, name: job.name, nextRun: (getTimeInIST(nextSchedule)), apiCalled: job.apiCalled })
         }
       }
 
@@ -72,17 +72,20 @@ const JobsHandler = (function () {
                   if ((session.available_capacity > 0) && (session.min_age_limit === job.ageLimit)) {
                     totalSlots+=session.available_capacity
                     if (session.available_capacity > maxSlot) maxSlot = session.available_capacity
-                    filteredSessions.push(session)
+                    if (job.dose && session[job.dose] > 0) {
+                      filteredSessions.push(session)
+                    } else { filteredSessions.push(session) }
                   }
                 })
             }
             if (filteredSessions.length) {
               shouldNotify=true
-              subject = `Maximum: ${maxSlot}, Total: ${totalSlots}. Vaccine centre at: ${job.name} for age ${job.ageLimit} has availability.`
+              subject = `Maximum: ${maxSlot}, Total: ${totalSlots}, for COVID Vaccine centres at: ${job.name} for age ${job.ageLimit}.`
                 // subject = 'Maximum: ' + maxSlot + '. Vaccine centre at: ' + job.name + ' for age ' + job.ageLimit + ' has availability.' 
               let formattedData = ''
               formattedData+='name: ' + job.name + '.\n'
               formattedData+='age: ' + job.ageLimit + '.\n'
+              formattedData+='pincode: ' + center.pincode + '.\n'
               formattedData+='details: ' + center.name + ' at ' + center.address + '.\n'
               formattedData+='sessions: ' + (filteredSessions.map(sesh => `${sesh.date} (avaiable slots = ${sesh.available_capacity})`)).join(', ') + '.\n\n'
               message+=formattedData
@@ -99,7 +102,7 @@ const JobsHandler = (function () {
         const notifnThreshold = job.notifnThreshold || 4
         if (shouldNotify && (totalSlots > notifnThreshold)) {
           console.log(`[JobsHandler.formatAndTriggerNotifn] ${job.id} ${job.name} , sending ${subject} mail to ${job.receivers}.`)
-          // NotificationHandler.sendMail(
+          // !process.env.NO_MAIL && NotificationHandler.sendMail(
           //   job.receivers,
           //   subject,
           //   message
@@ -121,23 +124,23 @@ const JobsHandler = (function () {
       }
     }
 
-    async function jobExecution (job) {
-      try {
-          logJobDetails(job)
+      async function jobExecution (job) {
+        try {
           const url = getJobAPI(job)
-          console.log('url is: ', url)
-          // call API from here
-          const res = await axios.get(
-            url, {
-              headers: {
-                "Accept": '*/*',
-              }
-            }).catch(error => {
-            console.log('[JobsHandler.jobExecution] catch block error while api call, error: ', error, error.statusCode, error.statusMessage)
-            addToErrorResponses(error)
-        })
+            logJobDetails({...job, apiCalled: url})
+            // call API from here
+            const res = await axios.get(
+              url, {
+                    headers: {
+                        "Accept": '*/*',
+                        "User-Agent": 'Mozilla/5.0 (Macintosh Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
+                    }
+                }).catch(error => {
+                console.log('[JobsHandler.jobExecution] catch block error while api call, error: ', error, error.statusCode, error.statusMessage)
+                addToErrorResponses(error)
+            })
 
-        formatAndTriggerNotifn (res.data.centers, job)
+            formatAndTriggerNotifn (res.data.centers, job)
 
       } catch (error) {
         return false
