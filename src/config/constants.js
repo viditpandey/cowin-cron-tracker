@@ -1,7 +1,7 @@
 const AWS_URL = 'http://cowin-cron-tracker.ap-south-1.elasticbeanstalk.com/getJob'
 const BASE_URL = 'https://cdn-api.co-vin.in/api'
 
-const checkNewJobsInterval = '* * * * * *'
+const checkNewJobsInterval = '0 2 * * *'
 
 // const pollingCronInterval = '* * * * *'
 const pollingCronInterval = '55 18 * * *'
