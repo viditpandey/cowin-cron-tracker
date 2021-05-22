@@ -73,6 +73,12 @@ const whatTo = [
         district_id: 265,
         district_name: "Bangalore Urban (Karnataka)",
         min_age_limit: 18,
+        receivers: "pandey.avi8@gmail.com,amitsrathore16@gmail.com,meghana.pydi@gmail.com"
+    },
+    {
+        district_id: 75,
+        district_name: "Katihar (Bihar)",
+        min_age_limit: 18,
         receivers: "pandey.avi8@gmail.com,amitsrathore16@gmail.com"
     },
 ]
