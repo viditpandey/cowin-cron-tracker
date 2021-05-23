@@ -1,7 +1,8 @@
 const AWS_URL = 'http://cowin-cron-tracker.ap-south-1.elasticbeanstalk.com/getJob'
 const BASE_URL = 'https://cdn-api.co-vin.in/api'
 
-const checkNewJobsInterval = '* * * * * *'
+const checkNewJobsInterval = '0 0 * * *'
+// const checkNewJobsInterval = '* * * * * *'
 
 // const pollingCronInterval = '* * * * *'
 const pollingCronInterval = '*/15 1-18 * * *'
@@ -13,12 +14,12 @@ const whatTo = [
     //     min_age_limit: 18,
     //     receivers: "pandey.avi8@gmail.com,alokverma816@gmail.com,yadavshubham20091994@gmail.com"
     // },
-    {
-        district_id: 646,
-        district_name: "Ayodhya (UP)",
-        min_age_limit: 45,
-        receivers: "pandey.avi8@gmail.com"
-    },
+    // {
+    //     district_id: 646,
+    //     district_name: "Ayodhya (UP)",
+    //     min_age_limit: 45,
+    //     receivers: "pandey.avi8@gmail.com"
+    // },
     // {
     //     district_id: 624,
     //     district_name: "Prayagraj (UP)",
