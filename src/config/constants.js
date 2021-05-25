@@ -6,12 +6,12 @@ const checkNewJobsInterval = '* * * * * *'
 const pollingCronInterval = '*/15 1-17 * * *'
 
 const whatTo = [
-    {
-        district_id: 646,
-        district_name: "Ayodhya (UP)",
-        min_age_limit: 18,
-        receivers: "pandey.avi8@gmail.com,alokverma816@gmail.com,yadavshubham20091994@gmail.com"
-    },
+    // {
+    //     district_id: 646,
+    //     district_name: "Ayodhya (UP)",
+    //     min_age_limit: 18,
+    //     receivers: "pandey.avi8@gmail.com,alokverma816@gmail.com,yadavshubham20091994@gmail.com"
+    // },
     // {
     //     district_id: 646,
     //     district_name: "Ayodhya (UP)",
@@ -36,6 +36,12 @@ const whatTo = [
     //     district_name: "Pune (Maharashtra)",
     //     min_age_limit: 18,
     //     receivers: "pandey.avi8@gmail.com,shwetavalunj@gmail.com,arnavmo@gmail.com,kalburgishraddha@gmail.com"
+    // },
+    // {
+    //     district_id: 75,
+    //     district_name: "Katihar (Bihar)",
+    //     min_age_limit: 18,
+    //     receivers: "pandey.avi8@gmail.com,amitsrathore16@gmail.com"
     // },
     {
         district_id: 670,
@@ -73,13 +79,8 @@ const whatTo = [
         district_id: 265,
         district_name: "Bangalore Urban (Karnataka)",
         min_age_limit: 18,
-        receivers: "pandey.avi8@gmail.com,amitsrathore16@gmail.com,meghana.pydi@gmail.com"
-    },
-    {
-        district_id: 75,
-        district_name: "Katihar (Bihar)",
-        min_age_limit: 18,
-        receivers: "pandey.avi8@gmail.com,amitsrathore16@gmail.com"
+        // receivers: "pandey.avi8@gmail.com,amitsrathore16@gmail.com,meghana.pydi@gmail.com"
+        receivers: "meghana.pydi@gmail.com"
     },
 ]
 
