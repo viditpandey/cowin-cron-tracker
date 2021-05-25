@@ -41,13 +41,13 @@ const whatTo = [
         district_id: 363,
         district_name: "Pune (Maharashtra)",
         min_age_limit: 18,
-        receivers: "shwetavalunj@gmail.com,kalburgishraddha@gmail.com"
+        receivers: "pandey.avi8@gmail.com,shwetavalunj@gmail.com,kalburgishraddha@gmail.com"
     },
     {
         district_id: 670,
         district_name: "Lucknow(UP)",
         min_age_limit: 18,
-        receivers: "pandey.avi8@gmail.com,aparajit35@gmail.com,chatterjee.raju@rediffmail.com,ashutoshchatterjee98@gmail.com"
+        receivers: "aparajit35@gmail.com,chatterjee.raju@rediffmail.com,ashutoshchatterjee98@gmail.com"
     },
     {
         district_id: 179,
