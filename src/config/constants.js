@@ -32,17 +32,17 @@ const whatTo = [
     //     receivers: "pandey.avi8@gmail.com,yatharthdeoly@gmail.com"
     // },
     // {
-    //     district_id: 363,
-    //     district_name: "Pune (Maharashtra)",
-    //     min_age_limit: 18,
-    //     receivers: "pandey.avi8@gmail.com,shwetavalunj@gmail.com,arnavmo@gmail.com,kalburgishraddha@gmail.com"
-    // },
-    // {
     //     district_id: 75,
     //     district_name: "Katihar (Bihar)",
     //     min_age_limit: 18,
     //     receivers: "pandey.avi8@gmail.com,amitsrathore16@gmail.com"
     // },
+    {
+        district_id: 363,
+        district_name: "Pune (Maharashtra)",
+        min_age_limit: 18,
+        receivers: "shwetavalunj@gmail.com,kalburgishraddha@gmail.com"
+    },
     {
         district_id: 670,
         district_name: "Lucknow(UP)",
