@@ -65,8 +65,7 @@ const whatTo = [
         district_id: 307,
         district_name: "Ernakulam (Kerala)",
         min_age_limit: 45,
-        notifn_threshold: 1,
-        receivers: "pandey.avi8@gmail.com,alpanakabra@gmail.com"
+        receivers: "alpanakabra@gmail.com"
     },
     {
         district_id: 453,
@@ -79,8 +78,19 @@ const whatTo = [
         district_id: 265,
         district_name: "Bangalore Urban (Karnataka)",
         min_age_limit: 18,
-        // receivers: "pandey.avi8@gmail.com,amitsrathore16@gmail.com,meghana.pydi@gmail.com"
         receivers: "meghana.pydi@gmail.com"
+    },
+    {
+        district_id: 296,
+        district_name: "Thiruvananthapuram (Kerala)",
+        min_age_limit: 18,
+        receivers: "pandey.avi8@gmail.com,chaithrarejith@gmail.com"
+    },
+    {
+        district_id: 296,
+        district_name: "Thiruvananthapuram (Kerala)",
+        min_age_limit: 45,
+        receivers: "pandey.avi8@gmail.com,chaithrarejith@gmail.com"
     },
 ]
 

@@ -67,9 +67,17 @@ const JobsHandler = (function () {
         data.forEach(center => {
           try {
             const filteredSessions = []
-            if (center && center.sessions && center.sessions.length) {
+            if (
+              center
+              && (center.sessions)
+              && (center.sessions.length)
+              // && (center.fee_type === (job.feeType || 'Free'))
+              ) {
                 center.sessions.forEach(session => {
-                  if ((session.available_capacity > 0) && (session.min_age_limit === job.ageLimit)) {
+                  if (
+                    (session.available_capacity > 0)
+                    && (session.min_age_limit === job.ageLimit)
+                    ) {
                     totalSlots+=session.available_capacity
                     if (session.available_capacity > maxSlot) maxSlot = session.available_capacity
                     if (job.dose && session[job.dose] > 0) {
