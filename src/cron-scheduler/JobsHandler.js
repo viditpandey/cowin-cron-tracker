@@ -93,6 +93,7 @@ const JobsHandler = (function () {
               let formattedData = ''
               formattedData+='name: ' + job.name + '.\n'
               formattedData+='age: ' + job.ageLimit + '.\n'
+              formattedData+='Fee-Type: ' + center.fee_type + '.\n'
               formattedData+='pincode: ' + center.pincode + '.\n'
               formattedData+='details: ' + center.name + ' at ' + center.address + '.\n'
               formattedData+='sessions: ' + (filteredSessions.map(sesh => `${sesh.date} (avaiable slots = ${sesh.available_capacity})`)).join(', ') + '.\n\n'
