@@ -41,7 +41,8 @@ const whatTo = [
         district_id: 363,
         district_name: "Pune (Maharashtra)",
         min_age_limit: 18,
-        receivers: "pandey.avi8@gmail.com,shwetavalunj@gmail.com,kalburgishraddha@gmail.com"
+        receivers: "pandey.avi8@gmail.com,shwetavalunj@gmail.com"
+        // receivers: "pandey.avi8@gmail.com,shwetavalunj@gmail.com,kalburgishraddha@gmail.com"
     },
     {
         district_id: 670,
@@ -61,12 +62,12 @@ const whatTo = [
         min_age_limit: 18,
         receivers: "pandey.avi8@gmail.com,divyakumari.1012@gmail.com"
     },
-    {
-        district_id: 307,
-        district_name: "Ernakulam (Kerala)",
-        min_age_limit: 45,
-        receivers: "alpanakabra@gmail.com"
-    },
+    // {
+    //     district_id: 307,
+    //     district_name: "Ernakulam (Kerala)",
+    //     min_age_limit: 45,
+    //     receivers: "alpanakabra@gmail.com"
+    // },
     {
         district_id: 453,
         district_name: "Sundargarh (Odisha)",
