@@ -71,7 +71,7 @@ const JobsHandler = (function () {
               center
               && (center.sessions)
               && (center.sessions.length)
-              // && (center.fee_type === (job.feeType || 'Free'))
+              && (job.feeType ? (center.fee_type === job.feeType) : true)
               ) {
                 center.sessions.forEach(session => {
                   if (
