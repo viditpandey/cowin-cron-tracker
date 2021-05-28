@@ -37,6 +37,12 @@ const whatTo = [
     //     min_age_limit: 18,
     //     receivers: "pandey.avi8@gmail.com,amitsrathore16@gmail.com"
     // },
+    // {
+    //     district_id: 670,
+    //     district_name: "Lucknow(UP)",
+    //     min_age_limit: 18,
+    //     receivers: "aparajit35@gmail.com,chatterjee.raju@rediffmail.com,ashutoshchatterjee98@gmail.com"
+    // },
     {
         district_id: 363,
         district_name: "Pune (Maharashtra)",
@@ -44,12 +50,6 @@ const whatTo = [
         min_age_limit: 18,
         receivers: "pandey.avi8@gmail.com,shwetavalunj@gmail.com"
         // receivers: "pandey.avi8@gmail.com,shwetavalunj@gmail.com,kalburgishraddha@gmail.com"
-    },
-    {
-        district_id: 670,
-        district_name: "Lucknow(UP)",
-        min_age_limit: 18,
-        receivers: "aparajit35@gmail.com,chatterjee.raju@rediffmail.com,ashutoshchatterjee98@gmail.com"
     },
     {
         district_id: 179,
@@ -74,7 +74,7 @@ const whatTo = [
         district_name: "Sundargarh (Odisha)",
         dose: "available_capacity_dose1",
         min_age_limit: 45,
-        receivers: "pandey.avi8@gmail.com,i.chhatwani29@gmail.com"
+        receivers: "i.chhatwani29@gmail.com"
     },
     {
         district_id: 265,
@@ -86,13 +86,13 @@ const whatTo = [
         district_id: 296,
         district_name: "Thiruvananthapuram (Kerala)",
         min_age_limit: 18,
-        receivers: "pandey.avi8@gmail.com,chaithrarejith@gmail.com"
+        receivers: "chaithrarejith@gmail.com"
     },
     {
         district_id: 296,
         district_name: "Thiruvananthapuram (Kerala)",
         min_age_limit: 45,
-        receivers: "pandey.avi8@gmail.com,chaithrarejith@gmail.com"
+        receivers: "chaithrarejith@gmail.com"
     },
 ]
 
