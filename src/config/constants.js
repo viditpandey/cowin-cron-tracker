@@ -43,6 +43,19 @@ const whatTo = [
     //     min_age_limit: 18,
     //     receivers: "aparajit35@gmail.com,chatterjee.raju@rediffmail.com,ashutoshchatterjee98@gmail.com"
     // },
+    // {
+    //     district_id: 307,
+    //     district_name: "Ernakulam (Kerala)",
+    //     min_age_limit: 45,
+    //     receivers: "alpanakabra@gmail.com"
+    // },
+    // {
+    //     district_id: 453,
+    //     district_name: "Sundargarh (Odisha)",
+    //     dose: "available_capacity_dose1",
+    //     min_age_limit: 45,
+    //     receivers: "i.chhatwani29@gmail.com"
+    // },
     {
         district_id: 363,
         district_name: "Pune (Maharashtra)",
@@ -62,19 +75,6 @@ const whatTo = [
         district_name: "West Delhi",
         min_age_limit: 18,
         receivers: "pandey.avi8@gmail.com,divyakumari.1012@gmail.com"
-    },
-    // {
-    //     district_id: 307,
-    //     district_name: "Ernakulam (Kerala)",
-    //     min_age_limit: 45,
-    //     receivers: "alpanakabra@gmail.com"
-    // },
-    {
-        district_id: 453,
-        district_name: "Sundargarh (Odisha)",
-        dose: "available_capacity_dose1",
-        min_age_limit: 45,
-        receivers: "i.chhatwani29@gmail.com"
     },
     {
         district_id: 265,
