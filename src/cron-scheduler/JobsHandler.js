@@ -77,6 +77,7 @@ const JobsHandler = (function () {
                   if (
                     (session.available_capacity > 0)
                     && (session.min_age_limit === job.ageLimit)
+                    && (job.vaccine ? (job.vaccine === session.vaccine) : true)
                     ) {
                     totalSlots+=session.available_capacity
                     if (session.available_capacity > maxSlot) maxSlot = session.available_capacity
@@ -96,7 +97,7 @@ const JobsHandler = (function () {
               formattedData+='Fee-Type: ' + center.fee_type + '.\n'
               formattedData+='pincode: ' + center.pincode + '.\n'
               formattedData+='details: ' + center.name + ' at ' + center.address + '.\n'
-              formattedData+='sessions: ' + (filteredSessions.map(sesh => `${sesh.date} (avaiable slots = ${sesh.available_capacity})`)).join(', ') + '.\n\n'
+              formattedData+='sessions: ' + (filteredSessions.map(sesh => `${sesh.date} (avaiable slots = ${sesh.available_capacity}) (vaccine = ${sesh.vaccine})`)).join(', ') + '.\n\n'
               message+=formattedData
             }
           } catch (error) {

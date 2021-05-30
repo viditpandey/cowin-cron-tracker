@@ -17,7 +17,8 @@ class JobsRepo {
           ageLimit: item.min_age_limit,
           notifnThreshold: item.notifn_threshold,
           receivers: item.receivers,
-          feeType: item.fee_type
+          feeType: item.fee_type,
+          vaccine: item.vaccine
         }
       })
       return res
