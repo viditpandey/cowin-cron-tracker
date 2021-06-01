@@ -79,11 +79,17 @@ const JobsHandler = (function () {
                     && (session.min_age_limit === job.ageLimit)
                     && (job.vaccine ? (job.vaccine === session.vaccine) : true)
                     ) {
-                    totalSlots+=session.available_capacity
-                    if (session.available_capacity > maxSlot) maxSlot = session.available_capacity
-                    if (job.dose && session[job.dose] > 0) {
+                    if (job.dose) {
+                      if (session[job.dose] > 0) {
+                        totalSlots+=session[job.dose]
+                        if (session[job.dose] > maxSlot) maxSlot = session[job.dose]
+                        filteredSessions.push(session)
+                      }
+                    } else {
+                      totalSlots+=session.available_capacity
+                      if (session.available_capacity > maxSlot) maxSlot = session.available_capacity
                       filteredSessions.push(session)
-                    } else { filteredSessions.push(session) }
+                    }
                   }
                 })
             }
