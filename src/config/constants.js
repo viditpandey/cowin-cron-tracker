@@ -84,18 +84,18 @@ const whatTo = [
         min_age_limit: 18,
         receivers: "meghana.pydi@gmail.com"
     },
-    {
-        district_id: 296,
-        district_name: "Thiruvananthapuram (Kerala)",
-        min_age_limit: 18,
-        receivers: "chaithrarejith@gmail.com"
-    },
-    {
-        district_id: 296,
-        district_name: "Thiruvananthapuram (Kerala)",
-        min_age_limit: 45,
-        receivers: "chaithrarejith@gmail.com"
-    },
+    // {
+    //     district_id: 296,
+    //     district_name: "Thiruvananthapuram (Kerala)",
+    //     min_age_limit: 18,
+    //     receivers: "chaithrarejith@gmail.com"
+    // },
+    // {
+    //     district_id: 296,
+    //     district_name: "Thiruvananthapuram (Kerala)",
+    //     min_age_limit: 45,
+    //     receivers: "chaithrarejith@gmail.com"
+    // },
     {
         district_id: 307,
         district_name: "Ernakulam (Kerala)",
