@@ -16,7 +16,9 @@ class JobsRepo {
           api: this.prepareAJob(item.district_id),
           ageLimit: item.min_age_limit,
           notifnThreshold: item.notifn_threshold,
-          receivers: item.receivers
+          receivers: item.receivers,
+          feeType: item.fee_type,
+          vaccine: item.vaccine
         }
       })
       return res

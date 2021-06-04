@@ -67,14 +67,29 @@ const JobsHandler = (function () {
         data.forEach(center => {
           try {
             const filteredSessions = []
-            if (center && center.sessions && center.sessions.length) {
+            if (
+              center
+              && (center.sessions)
+              && (center.sessions.length)
+              && (job.feeType ? (center.fee_type === job.feeType) : true)
+              ) {
                 center.sessions.forEach(session => {
-                  if ((session.available_capacity > 0) && (session.min_age_limit === job.ageLimit)) {
-                    totalSlots+=session.available_capacity
-                    if (session.available_capacity > maxSlot) maxSlot = session.available_capacity
-                    if (job.dose && session[job.dose] > 0) {
+                  if (
+                    (session.available_capacity > 0)
+                    && (session.min_age_limit === job.ageLimit)
+                    && (job.vaccine ? (job.vaccine === session.vaccine) : true)
+                    ) {
+                    if (job.dose) {
+                      if (session[job.dose] > 0) {
+                        totalSlots+=session[job.dose]
+                        if (session[job.dose] > maxSlot) maxSlot = session[job.dose]
+                        filteredSessions.push(session)
+                      }
+                    } else {
+                      totalSlots+=session.available_capacity
+                      if (session.available_capacity > maxSlot) maxSlot = session.available_capacity
                       filteredSessions.push(session)
-                    } else { filteredSessions.push(session) }
+                    }
                   }
                 })
             }
@@ -85,9 +100,10 @@ const JobsHandler = (function () {
               let formattedData = ''
               formattedData+='name: ' + job.name + '.\n'
               formattedData+='age: ' + job.ageLimit + '.\n'
+              formattedData+='Fee-Type: ' + center.fee_type + '.\n'
               formattedData+='pincode: ' + center.pincode + '.\n'
               formattedData+='details: ' + center.name + ' at ' + center.address + '.\n'
-              formattedData+='sessions: ' + (filteredSessions.map(sesh => `${sesh.date} (avaiable slots = ${sesh.available_capacity})`)).join(', ') + '.\n\n'
+              formattedData+='sessions: ' + (filteredSessions.map(sesh => `${sesh.date} (avaiable slots = ${sesh.available_capacity}) (vaccine = ${sesh.vaccine})`)).join(', ') + '.\n\n'
               message+=formattedData
             }
           } catch (error) {
