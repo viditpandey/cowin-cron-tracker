@@ -58,6 +58,24 @@ const whatTo = [
     //     min_age_limit: 45,
     //     receivers: "i.chhatwani29@gmail.com"
     // },
+    // {
+    //     district_id: 179,
+    //     district_name: "Anand (Gujarat)",
+    //     min_age_limit: 18,
+    //     receivers: "pandey.avi8@gmail.com,kinjalparmar1992@gmail.com"
+    // },
+    // {
+    //     district_id: 296,
+    //     district_name: "Thiruvananthapuram (Kerala)",
+    //     min_age_limit: 18,
+    //     receivers: "chaithrarejith@gmail.com"
+    // },
+    // {
+    //     district_id: 296,
+    //     district_name: "Thiruvananthapuram (Kerala)",
+    //     min_age_limit: 45,
+    //     receivers: "chaithrarejith@gmail.com"
+    // },
     {
         district_id: 363,
         district_name: "Pune (Maharashtra)",
@@ -65,12 +83,6 @@ const whatTo = [
         min_age_limit: 18,
         receivers: "pandey.avi8@gmail.com,shwetavalunj@gmail.com"
         // receivers: "pandey.avi8@gmail.com,shwetavalunj@gmail.com,kalburgishraddha@gmail.com"
-    },
-    {
-        district_id: 179,
-        district_name: "Anand (Gujarat)",
-        min_age_limit: 18,
-        receivers: "pandey.avi8@gmail.com,kinjalparmar1992@gmail.com"
     },
     {
         district_id: 142,
@@ -84,18 +96,6 @@ const whatTo = [
         min_age_limit: 18,
         receivers: "meghana.pydi@gmail.com"
     },
-    // {
-    //     district_id: 296,
-    //     district_name: "Thiruvananthapuram (Kerala)",
-    //     min_age_limit: 18,
-    //     receivers: "chaithrarejith@gmail.com"
-    // },
-    // {
-    //     district_id: 296,
-    //     district_name: "Thiruvananthapuram (Kerala)",
-    //     min_age_limit: 45,
-    //     receivers: "chaithrarejith@gmail.com"
-    // },
     {
         district_id: 307,
         district_name: "Ernakulam (Kerala)",
