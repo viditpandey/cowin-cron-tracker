@@ -76,20 +76,20 @@ const whatTo = [
     //     min_age_limit: 45,
     //     receivers: "chaithrarejith@gmail.com"
     // },
-    {
-        district_id: 363,
-        district_name: "Pune (Maharashtra)",
-        fee_type: 'Free',
-        min_age_limit: 18,
-        receivers: "pandey.avi8@gmail.com,shwetavalunj@gmail.com"
-        // receivers: "pandey.avi8@gmail.com,shwetavalunj@gmail.com,kalburgishraddha@gmail.com"
-    },
-    {
-        district_id: 142,
-        district_name: "West Delhi",
-        min_age_limit: 18,
-        receivers: "pandey.avi8@gmail.com,divyakumari.1012@gmail.com"
-    },
+    // {
+    //     district_id: 363,
+    //     district_name: "Pune (Maharashtra)",
+    //     fee_type: 'Free',
+    //     min_age_limit: 18,
+    //     receivers: "pandey.avi8@gmail.com,shwetavalunj@gmail.com"
+    //     // receivers: "pandey.avi8@gmail.com,shwetavalunj@gmail.com,kalburgishraddha@gmail.com"
+    // },
+    // {
+    //     district_id: 142,
+    //     district_name: "West Delhi",
+    //     min_age_limit: 18,
+    //     receivers: "pandey.avi8@gmail.com,divyakumari.1012@gmail.com"
+    // },
     {
         district_id: 265,
         district_name: "Bangalore Urban (Karnataka)",
