@@ -13,15 +13,15 @@ const whatTo = [
     //     vaccine: 'COVAXIN',
     //     receivers: "pandey.avi8@gmail.com,alokverma816@gmail.com"
     // },
-    {
-        district_id: 646,
-        district_name: "Ayodhya (UP)",
-        min_age_limit: 45,
-        dose: "available_capacity_dose1",
-        vaccine: 'COVISHIELD',
-        receivers: "pandey.avi8@gmail.com"
-        // receivers: "pandey.avi8@gmail.com,shwetavalunj@gmail.com,vinodpandey8794@gmail.com,alokverma816@gmail.com"
-    },
+    // {
+    //     district_id: 646,
+    //     district_name: "Ayodhya (UP)",
+    //     min_age_limit: 45,
+    //     dose: "available_capacity_dose1",
+    //     vaccine: 'COVISHIELD',
+    //     receivers: "pandey.avi8@gmail.com"
+    //     // receivers: "pandey.avi8@gmail.com,shwetavalunj@gmail.com,vinodpandey8794@gmail.com,alokverma816@gmail.com"
+    // },
     // {
     //     district_id: 624,
     //     district_name: "Prayagraj (UP)",
@@ -95,7 +95,7 @@ const whatTo = [
         district_id: 265,
         district_name: "Bangalore Urban (Karnataka)",
         min_age_limit: 18,
-        receivers: "meghana.pydi@gmail.com"
+        receivers: "pandey.avi8@gmail.com,meghana.pydi@gmail.com"
     },
     {
         district_id: 307,
