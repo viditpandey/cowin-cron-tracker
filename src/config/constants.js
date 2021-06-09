@@ -1,6 +1,7 @@
 const BASE_URL = 'https://cdn-api.co-vin.in/api'
 
-const checkNewJobsInterval = '* * * * * *'
+// const checkNewJobsInterval = '* * * * * *'
+const checkNewJobsInterval = '0 0 * * *'
 
 // const pollingCronInterval = '* * * * *'
 const pollingCronInterval = '*/15 1-17 * * *'
@@ -91,28 +92,28 @@ const whatTo = [
     //     min_age_limit: 18,
     //     receivers: "pandey.avi8@gmail.com,divyakumari.1012@gmail.com"
     // },
-    {
-        district_id: 265,
-        district_name: "Bangalore Urban (Karnataka)",
-        min_age_limit: 18,
-        receivers: "pandey.avi8@gmail.com,meghana.pydi@gmail.com"
-    },
-    {
-        district_id: 307,
-        district_name: "Ernakulam (Kerala)",
-        min_age_limit: 18,
-        dose: "available_capacity_dose1",
-        vaccine: 'COVISHIELD',
-        receivers: "pandey.avi8@gmail.com,alpanakabra@gmail.com"
-    },
-    {
-        district_id: 307,
-        district_name: "Ernakulam (Kerala)",
-        min_age_limit: 45,
-        dose: "available_capacity_dose2",
-        vaccine: 'COVISHIELD',
-        receivers: "pandey.avi8@gmail.com,alpanakabra@gmail.com"
-    },
+    // {
+    //     district_id: 265,
+    //     district_name: "Bangalore Urban (Karnataka)",
+    //     min_age_limit: 18,
+    //     receivers: "pandey.avi8@gmail.com,meghana.pydi@gmail.com"
+    // },
+    // {
+    //     district_id: 307,
+    //     district_name: "Ernakulam (Kerala)",
+    //     min_age_limit: 18,
+    //     dose: "available_capacity_dose1",
+    //     vaccine: 'COVISHIELD',
+    //     receivers: "pandey.avi8@gmail.com,alpanakabra@gmail.com"
+    // },
+    // {
+    //     district_id: 307,
+    //     district_name: "Ernakulam (Kerala)",
+    //     min_age_limit: 45,
+    //     dose: "available_capacity_dose2",
+    //     vaccine: 'COVISHIELD',
+    //     receivers: "pandey.avi8@gmail.com,alpanakabra@gmail.com"
+    // },
 ]
 
 const whereTo = {
